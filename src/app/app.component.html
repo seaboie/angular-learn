@@ -1,19 +1,6 @@
 <main>
   <section class="my-5">
-   <div class="bg-amber-100 p-4" [contentEditable]="isEditable"></div>
-   <button class="btn-primary" (click)="isEditable = !isEditable">
-    @if (isEditable) {
-      None Editable
-    }
-    @else {
-      Editable
-    }
-   </button>
-  </section>
-  <hr>
-  <section class="my-5">
-    <button class="btn-primary" (click)="greeting()">Greeting</button>
-    <div (mouseover)="onMouseOver()" class="h-20 bg-blue-300"></div>
+   <app-user occupation="Angular Developer" name="Simran"/>
   </section>
 
 </main>

@@ -4,19 +4,10 @@ import { UserComponent } from "./user/user.component";
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [UserComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  isEditable = true;
-
-  greeting() {
-    alert(" Hello, there 👏")
-  }
-
-  message: string = "Way to go : Mouse Over 🚀"
-  onMouseOver() {
-    alert(this.message);
-  }
+  
 }
