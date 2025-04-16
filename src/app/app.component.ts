@@ -9,9 +9,14 @@ import { UserComponent } from "./user/user.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  isLoggedIn = true;
-  isServerRunning = false;
+  isEditable = true;
 
-  operatingSystems = [{id: 'win', name: 'Windows'}, {id: 'osx', name: 'MacOS'}, {id: 'linux', name: 'Linux'}];
-  users = [{id: 0, name: 'Sarah'}, {id: 1, name: 'Amy'}, {id: 2, name: 'Rachel'}, {id: 3, name: 'Jessica'}, {id: 4, name: 'Poornima'}];
+  greeting() {
+    alert(" Hello, there 👏")
+  }
+
+  message: string = "Way to go : Mouse Over 🚀"
+  onMouseOver() {
+    alert(this.message);
+  }
 }

@@ -1,25 +1,19 @@
 <main>
-  <section>
-    @if (isLoggedIn) {
-      <p>Welcome back, Friend!!!!!</p>
-    }
-  </section>
-  <section>
-    @if (isServerRunning) {
-      <p>Yes, the server is running</p>
+  <section class="my-5">
+   <div class="bg-amber-100 p-4" [contentEditable]="isEditable"></div>
+   <button class="btn-primary" (click)="isEditable = !isEditable">
+    @if (isEditable) {
+      None Editable
     }
     @else {
-      <p>No, the server is not running</p>
+      Editable
     }
+   </button>
   </section>
-  <section class="bg-amber-50 p-4 mb-4 mt-4">
-    @for (os of operatingSystems; track os.id) {
-      <p>{{os.name}}</p>
-    }
+  <hr>
+  <section class="my-5">
+    <button class="btn-primary" (click)="greeting()">Greeting</button>
+    <div (mouseover)="onMouseOver()" class="h-20 bg-blue-300"></div>
   </section>
-  <section class="bg-amber-50 p-4 mb-4 ">
-    @for (user of users; track user.id) {
-      <p>{{user.name}}</p>
-    }
-  </section>
+
 </main>
