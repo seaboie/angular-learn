@@ -1,6 +1,16 @@
 <main>
   <section class="my-5">
-   <app-user occupation="Angular Developer" name="Simran"/>
+    <app-user occupation="Angular Developer" name="Simran" />
+  </section>
+  <section>
+    <p>{{count}}</p>
+    <app-child (addItemEvent)="handleAddItem($event)" (incrementCountEvent)="handleIncrement($event)"/>
+    <p>🐢 All the way down {{items.length}}</p>
+    <ul class="flex flex-wrap gap-4">
+      @for (item of items; track item) {
+        <li class="text-3xl p-5">{{item}}</li>
+      }
+    </ul>
   </section>
 
 </main>
