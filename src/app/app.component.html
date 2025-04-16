@@ -1,5 +1,25 @@
 <main>
   <section>
-    <app-user />
+    @if (isLoggedIn) {
+      <p>Welcome back, Friend!!!!!</p>
+    }
+  </section>
+  <section>
+    @if (isServerRunning) {
+      <p>Yes, the server is running</p>
+    }
+    @else {
+      <p>No, the server is not running</p>
+    }
+  </section>
+  <section class="bg-amber-50 p-4 mb-4 mt-4">
+    @for (os of operatingSystems; track os.id) {
+      <p>{{os.name}}</p>
+    }
+  </section>
+  <section class="bg-amber-50 p-4 mb-4 ">
+    @for (user of users; track user.id) {
+      <p>{{user.name}}</p>
+    }
   </section>
 </main>
