@@ -1,24 +1,21 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
   imports: [],
   templateUrl: './child.component.html',
-  styleUrl: './child.component.css',
+  styleUrl: './child.component.css'
 })
 export class ChildComponent {
-
-  @Input() items: string[] = [];
-
   count: number = 0;
   @Output() incrementCountEvent = new EventEmitter<number>();
-  onEmitIncrement() {
+  onEmitClick() {
     this.count++;
     this.incrementCountEvent.emit(this.count);
   }
 
   @Output() addItemEvent = new EventEmitter<string>();
   onEmitAddItem() {
-    this.addItemEvent.emit('🐢');
+    this.addItemEvent.emit("🐢");
   }
 }

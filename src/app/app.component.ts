@@ -1,23 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { UserComponent } from "./user/user.component";
 import { ChildComponent } from "./child/child.component";
 
 @Component({
   selector: 'app-root',
-  imports: [UserComponent, ChildComponent],
+  imports: [ChildComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  
-  items: string[] = [];
-  handleAddItem(item: string) {
-    this.items.push(item);
+  item: number = 0;
+  handlerIncrement(num: number) {
+    this.item = num;
   }
 
-  count: number = 0;
-  handleIncrement(item: number) {
-    this.count = item;
+  // 
+  items: string[] = [];
+  handlerAddItem(item: string) {
+    this.items.push(item);
   }
 }

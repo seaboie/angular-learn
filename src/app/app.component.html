@@ -1,14 +1,12 @@
 <main>
   <section class="my-5">
-    <app-user occupation="Angular Developer" name="Simran" />
+    <p class="text-8xl">{{item}}</p>
+    <app-child (incrementCountEvent)="handlerIncrement($event)" (addItemEvent)="handlerAddItem($event)" />
   </section>
   <section>
-    <p>{{count}}</p>
-    <app-child (addItemEvent)="handleAddItem($event)" (incrementCountEvent)="handleIncrement($event)" [items]="items"/>
-    <p>🐢 All the way down {{items.length}}</p>
-    <ul class="flex flex-wrap gap-4">
+    <ul class="flex flex-wrap gap-5">
       @for (item of items; track item) {
-        <li class="text-3xl p-5">{{item}}</li>
+        <li class="text-5xl">{{item}}</li>
       }
     </ul>
   </section>
