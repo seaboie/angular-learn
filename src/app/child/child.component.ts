@@ -8,6 +8,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ChildComponent {
 
+  @Input() items: string[] = [];
+
   count: number = 0;
   @Output() incrementCountEvent = new EventEmitter<number>();
   onEmitIncrement() {

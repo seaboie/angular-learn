@@ -2,4 +2,9 @@
 
 <button class="btn-primary" (click)="onEmitIncrement()">Increment</button>
 <br>
+<ul class="flex flex-wrap gap-5">
+    @for (item of items; track item) {
+        <li class="text-6xl">{{item}}</li>
+    }
+</ul>
 <button class="btn-primary" (click)="onEmitAddItem()">Add item</button>

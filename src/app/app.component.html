@@ -4,7 +4,7 @@
   </section>
   <section>
     <p>{{count}}</p>
-    <app-child (addItemEvent)="handleAddItem($event)" (incrementCountEvent)="handleIncrement($event)"/>
+    <app-child (addItemEvent)="handleAddItem($event)" (incrementCountEvent)="handleIncrement($event)" [items]="items"/>
     <p>🐢 All the way down {{items.length}}</p>
     <ul class="flex flex-wrap gap-4">
       @for (item of items; track item) {
