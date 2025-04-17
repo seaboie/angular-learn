@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './child.component.css',
 })
 export class ChildComponent {
+
   count: number = 0;
   @Output() incrementCountEvent = new EventEmitter<number>();
   onEmitIncrement() {
