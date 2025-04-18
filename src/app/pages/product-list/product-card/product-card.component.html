@@ -1,21 +1,26 @@
 <div class="p-6 bg-white shadow-md border rounded-xl flex flex-col relative">
+    @if (product(); as product) {
     <div class="mx-auto">
         <!--  -->
-        <img [src]="product().image" class="w-[200px] h-[100px] object-contain" alt="">
-        <div class="mt-2 flex flex-col">
-            <span class="text-lg font-bold" >{{product().title}}</span>
-            <span class="text-sm" >{{ '$' + product().price}}</span>
-            <app-primary-button label="Add to Cart"  />
+        <img [src]="product.image" class="w-[200px] h-[100px] object-contain" [alt]="product.title">
+        <div class="mt-2 flex flex-col gap-2">
+            <span class="text-lg font-bold line-clamp-1">{{product.title}}</span>
+            <span class="text-sm font-medium">{{ '$' + product.price}}</span>
+            <app-primary-button 
+                label="Add to Cart" 
+                [class.opacity-50]="!product.stock"
+                [hidden]="!product.stock"
+                (btnClicked)="cartService.addToCart(product)" 
+            />
         </div>
-        <!--  -->
-        @if (product(); as product) {
-            <span class="absolute top-3 right-3 text-sm font-bold"
-                [class.text-green-800]="product.stock"
-                [class.text-red-500]="!product.stock"
-            >
-                {{product.stock ? product.stock + ' left' : 'Out of Stock'}}
-            </span>
-        }
-          
+        <!--  Absolute Element -->
+        <span class="absolute top-3 right-3 text-sm font-bold" [class.text-green-800]="product.stock"
+            [class.text-red-500]="!product.stock">
+            {{product.stock ? product.stock + ' left' : 'Out of Stock'}}
+        </span>
+
+
     </div>
+    }
+
 </div>
