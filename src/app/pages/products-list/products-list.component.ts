@@ -1,15 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { ProductsModel } from '../../models/products.model';
-import { ProductCardComponent } from "../product-list/product-card/product-card.component";
+import { ProductModel } from '../../models/products.model';
+import { ProductCardComponent } from '../product-list/product-card/product-card.component';
 
 @Component({
   selector: 'app-products-list',
   imports: [ProductCardComponent],
   templateUrl: './products-list.component.html',
-  styleUrl: './products-list.component.css'
+  styleUrl: './products-list.component.css',
 })
 export class ProductsListComponent {
-  products = signal<ProductsModel[]>([
+  products = signal<ProductModel[]>([
     {
       id: 1,
       title: 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
@@ -40,5 +40,5 @@ export class ProductsListComponent {
       image: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
       stock: 7,
     },
-  ])
+  ]);
 }
