@@ -9,7 +9,6 @@
             <app-primary-button 
                 label="Add to Cart" 
                 [class.opacity-50]="!product.stock"
-                [hidden]="!product.stock"
                 (btnClicked)="cartService.addToCart(product)" 
             />
         </div>
