@@ -119,3 +119,31 @@ console.log(firstNameCapitalized()); // JAIME
 
 ```  
 
+## Showing dynamic text  
+[Showing dynamic text](https://angular.dev/essentials/templates#showing-dynamic-text)  
+
+You can create a binding to show some dynamic text in a template by using double curly-braces:  
+`{{...}}`
+```ts
+@Component({
+  selector: 'user-profile',
+  template: `<h1>Profile for {{userName()}}</h1>`,
+})
+export class TodoListItem {
+  userName = signal('pro_programmer_123');
+}
+```  
+
+## Dependency Injection  
+
+[Dependency Injection](https://angular.dev/essentials/dependency-injection)  
+
+Reuse code and control behaviors across your application and tests.  
+
+
+
+
+
+
+
+

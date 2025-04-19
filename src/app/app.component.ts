@@ -8,18 +8,19 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tutorial';
 
-  firstName = signal('Hello World!');
-  handleClicked() {
-    this.firstName.set("Kritbovorn");
+  isValidUserId = signal(false);
+  userName = signal("pro_programmer_123");
+
+  handlerClicked() {
+    this.userName.set("cool_coder_789");
   }
+
   handleUpdate() {
-    this.firstName.update((name) => "Taweeyossak");
+    this.userName.update((current) => "Kritbovorn");
   }
 
-  count = signal(0);
-  handleIncrement() {
-    this.count.update((num) => num + 1);
+  handleIsValid() {
+    this.isValidUserId.set(!this.isValidUserId());
   }
 }
