@@ -180,4 +180,28 @@ export class Receipt {
 
 
 
+## Use ` *ngFor() `  
+
+> Must import `CommonModule`  
+```ts
+import { CommonModule } from '@angular/common';
+@Component({
+  selector: 'app-home',
+  imports: [HousingLocationComponent, CommonModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
+})
+export class HomeComponent {
+  ...
+}
+```  
+
+```ts
+<section class="results">
+    <app-housing-location
+        *ngFor="let housingLocation of housingLocationList"
+        [housingLocation]="housingLocation"
+    />
+</section>
+```  
 
