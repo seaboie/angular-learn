@@ -2,6 +2,10 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
+## On Youtube  
+[Modern Angular 19 Crash Course - E-commerce App!](https://www.youtube.com/watch?v=RNr1QZM4A38)  
+
+
 ## Development server
 
 To start a local development server, run:
@@ -57,3 +61,61 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+---
+
+## Declare property `String`
+- Use `get`  
+
+```ts
+get cartLabel() {
+    return `Cart ( ${this.cartService.cart().length} )`;
+}
+```  
+
+## Signal method  
+
+[Signal](https://angular.dev/essentials/signals)  
+[Angular Signals](https://angular.dev/guide/signals)  
+
+Manage State  
+
+### `set`  
+### `update(() => ...)`
+
+```ts
+import {signal} from '@angular/core';
+
+// Create a signal with the `signal` function.
+const firstName = signal('Morgan');
+
+// Read a signal value by calling it— signals are functions.
+console.log(firstName());
+
+// Change the value of this signal by calling its `set` method with a new value.
+firstName.set('Jaime');
+
+// You can also use the `update` method to change the value
+// based on the previous value.
+firstName.update(name => name.toUpperCase());
+
+```  
+
+## Computed expressions  
+[Computed expressions](https://angular.dev/essentials/signals#computed-expressions)  
+
+A `computed` signal is read-only; it does not have a `set` or an `update` method. Instead, the value of the `computed` signal automatically changes when any of the signals it reads change:  
+
+```ts
+import {signal, computed} from '@angular/core';
+
+const firstName = signal('Morgan');
+const firstNameCapitalized = computed(() => firstName().toUpperCase());
+console.log(firstNameCapitalized()); // MORGAN
+
+firstName.set('Jaime');
+
+console.log(firstNameCapitalized()); // JAIME
+
+```  
+
