@@ -205,3 +205,65 @@ export class HomeComponent {
 </section>
 ```  
 
+## 🚀 🚀 🚀 `(input)` event binding  
+
+```ts
+<input
+  type="text"
+  placeholder="Filter by City"
+  #filter
+  (input)="filterResults(filter.value)" // Listen to the 'input' event
+/>
+```  
+
+To make the filtering happen as the user types, instead of waiting for a button click, you need to listen to the `(input)` event on the text input field. Here's what I've changed in your code:  
+
+1. Import `FormsModule`: I've added `FormsModule` to the `imports` array in your `@Component` decorator. This module is necessary to work with form elements and their events.  
+
+2. Listen to `(input)`: On the `<input>` element, I've added the `(input)` event binding. This event fires every time the value of the input field changes.  
+
+3. Call `filterResults` on `input`: The `(input)` event binding calls your `filterResults method`, passing in the current value of the input field `(filter.value)`.  
+
+Now, as the user types in the "Filter by City" input, the `filterResults` function will be executed on each keystroke, updating the `filteredLocationList` and instantly reflecting the changes in the displayed housing locations.  
+
+## Template reference variable on `<input>`  
+
+In your template, `#filter` creates a template reference variable on the `<input>` element:  
+
+```ts
+<input
+  type="text"
+  placeholder="Filter by City"
+  #filter
+  (input)="filterResults(filter.value)"
+  (focus)="clearPlaceholder(filter)"
+  (blur)="restorePlaceholder(filter)"
+/>
+```  
+
+This `#filter` acts like a local name that you can use within the template to refer directly to that specific `<input>` element. It gives you a way to access the properties and methods of the underlying DOM element.  
+
+Now, let's look at the event bindings:  
+
+- `(focus)="clearPlaceholder(filter)"`:   
+When the `focus` event occurs on the `<input>` element, Angular will execute the `clearPlaceholder method` in your `HomeComponent`. The `(filter)` part is passing the template reference variable (which points to the `<input>` element itself) as an argument to the `clearPlaceholder method`.  
+
+- `(blur)="restorePlaceholder(filter)"`:   
+Similarly, when the `blur` event occurs, Angular calls the `restorePlaceholder method`, again passing the template reference variable (filter) as an argument.  
+
+Here's how your methods are defined in the component:  
+
+```ts
+clearPlaceholder(inputElement: HTMLInputElement) {
+  inputElement.placeholder = '';
+}
+
+restorePlaceholder(inputElement: HTMLInputElement) {
+  if (!inputElement.value) {
+    inputElement.placeholder = this.originalPlaceholder;
+  }
+}
+```  
+
+
+
