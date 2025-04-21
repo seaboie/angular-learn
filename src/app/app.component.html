@@ -1,6 +1,15 @@
 <main>
-  <section class="my-5">
-   <app-user occupation="Angular Developer" name="Simran"/>
+  <section class="my-52">
+
+    <input 
+      class="input-nice" 
+      [(ngModel)]="todoText" 
+      [attr.placeholder]="isFocused ? '' : placeholderText"
+      (focus)="isFocused = true" 
+      (blur)="isFocused = false" 
+    />
+
+
   </section>
 
 </main>
