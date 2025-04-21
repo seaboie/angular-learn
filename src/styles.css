@@ -1,10 +1,4 @@
 @import "tailwindcss";
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: 'Be Vietnam Pro', sans-serif;
 }
@@ -33,4 +27,8 @@ body {
 
 .text-h {
   @apply text-gray-600;
+}
+
+.input-nice {
+  @apply w-full my-10 px-4 py-2 border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
 }
