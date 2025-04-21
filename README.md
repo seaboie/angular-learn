@@ -62,7 +62,264 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
+---   
+
+---   
+
+# Immutable && Mutable  
+
+🔥 🔥 🔥 การเปลี่ยน state แบบ **immutable** เป็นแนวคิดที่สำคัญมาก โดยเฉพาะเมื่อใช้กับ `ChangeDetectionStrategy.OnPush` ใน Angular  
+เดี๋ยวอธิบายให้ง่าย ๆ พร้อมตัวอย่างเลยครับ 🧠👇
+
 ---
+
+## 🧊 คืออะไร: "เปลี่ยน state แบบ **immutable**"
+
+### ❌ "Mutable" คือการ **เปลี่ยนแปลงของเดิม**
+
+```ts
+const user = { name: 'John' };
+user.name = 'Jane'; // เปลี่ยน object เดิม
+```
+
+- แบบนี้ Angular **ไม่สามารถรู้ได้ว่า object เปลี่ยน**  
+เพราะ reference ของ `user` **ยังเป็นตัวเดิมอยู่**
+
+---
+
+### ✅ "Immutable" คือการ **สร้าง object ใหม่**
+
+```ts
+const user = { name: 'John' };
+const newUser = { ...user, name: 'Jane' }; // สร้างใหม่โดย copy แล้วเปลี่ยนเฉพาะ name
+```
+
+- แบบนี้ `newUser` จะมี **reference ใหม่**
+- Angular ที่ใช้ `OnPush` จะรู้ว่า `@Input()` เปลี่ยน → จึง render ใหม่
+
+---
+
+## 🔍 ตัวอย่างใน Angular จริง ๆ
+
+### 🔸 สมมุติว่าเรามี component แบบนี้:
+
+```ts
+@Component({
+  selector: 'app-profile',
+  template: `ชื่อ: {{ user.name }}`,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class ProfileComponent {
+  @Input() user!: { name: string };
+}
+```
+
+### 🔸 แล้วใน parent component:
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: `
+    <app-profile [user]="user"></app-profile>
+    <button (click)="changeName()">เปลี่ยนชื่อ</button>
+  `
+})
+export class AppComponent {
+  user = { name: 'John' };
+
+  // ❌ แบบนี้ผิด ถ้าใช้ OnPush
+  changeName() {
+    this.user.name = 'Jane';
+  }
+
+  // ✅ แบบนี้ถูก
+  // changeName() {
+  //   this.user = { ...this.user, name: 'Jane' };
+  // }
+}
+```
+
+### 📌 ทำไมแบบแรกไม่ทำงาน?
+เพราะ Angular ดูว่า `@Input() user` เปลี่ยนมั้ย **จาก reference เดิม**  
+แต่ `this.user.name = 'Jane'` → reference เดิม → Angular ไม่ detect → ไม่ render ใหม่
+
+---
+
+## 🧠 TL;DR: Immutable Update Pattern
+
+| เป้าหมาย | วิธีเขียน |
+|----------|-----------|
+| เปลี่ยน string หรือ number | `this.name = 'New Name';` (ok) |
+| เปลี่ยน object | `this.user = { ...this.user, name: 'New' };` |
+| เปลี่ยน array | `this.list = [...this.list, newItem];` |
+| ลบใน array | `this.list = this.list.filter(x => x.id !== id);` |
+| อัปเดตใน array | `this.list = this.list.map(item => item.id === id ? {...item, name: 'Updated'} : item);` |
+
+---
+
+---  
+
+## 🛠️ 🛠️ 🛠️ 🛠️ 🛠️ Use Spread operator  
+
+ **Spread Operator (`...`)**  **object** และ **array**  😄
+
+---
+
+## 🌀 Spread Operator คืออะไร?
+
+**`...`** (สามจุด) เรียกว่า **spread operator**  
+มันใช้เพื่อ:
+
+1. **คัดลอก (copy)** ค่าจาก **object** หรือ **array**
+2. **ขยาย (spread)** เนื้อหาของ object หรือ array ไปยังอีกอันนึง
+
+---
+
+## 🧱 ใช้กับ **Object**
+
+### ✅ ตัวอย่าง:
+
+```ts
+const user = { name: 'John', age: 25 };
+
+const newUser = { ...user, name: 'Jane' };
+```
+
+### 👉 อธิบาย:
+
+- `...user` จะคัดลอก field ทั้งหมดจาก `user` มาใส่ใน `newUser`
+- แล้ว `name: 'Jane'` จะ **overwrite** ค่าเดิมของ name
+
+### 🎯 ผลลัพธ์:
+```ts
+newUser = { name: 'Jane', age: 25 }
+```
+
+> ✅ แบบนี้คือ **immutable update** เพราะ `newUser` เป็น object ใหม่ (reference ใหม่)
+
+---
+
+## 📚 ใช้กับ **Array**
+
+### ✅ ตัวอย่าง:
+
+```ts
+const numbers = [1, 2, 3];
+
+const newNumbers = [...numbers, 4];
+```
+
+### 👉 อธิบาย:
+
+- `...numbers` คัดลอกค่าทั้งหมดใน array
+- แล้วต่อท้ายด้วย `4`
+
+### 🎯 ผลลัพธ์:
+```ts
+newNumbers = [1, 2, 3, 4]
+```
+
+---
+
+## 🧠 สรุปง่าย ๆ:
+
+| งานที่ทำ | Code ตัวอย่าง | ผลลัพธ์ |
+|----------|----------------|----------|
+| Clone object | `{ ...user }` | copy ใหม่ |
+| Update field | `{ ...user, name: 'A' }` | เปลี่ยนเฉพาะ field |
+| Add to array | `[...arr, item]` | ต่อท้าย |
+| Remove from array | `arr.filter()` | เอาออก |
+| Update item in array | `arr.map()` + `...item` | แก้เฉพาะบางตัว |
+
+---
+
+## 🔧 ตัวอย่างที่ใช้ใน Angular (กับ `OnPush`)
+
+```ts
+this.user = { ...this.user, name: 'ใหม่' }; // update object แบบ immutable
+this.todos = [...this.todos, newTodo]; // เพิ่ม todo แบบ immutable
+```
+
+---
+
+## 💬 สรุปสั้น ๆ:
+
+- `...` ใช้เพื่อ "แผ่" object หรือ array ออกมา
+- ใช้กับ `OnPush` เพื่อให้ Angular รู้ว่า **ค่ามีการเปลี่ยนแปลง**
+- ช่วยให้เขียน code ที่ **clean**, **ปลอดภัย**, และ **เร็ว** (Angular จะตรวจเฉพาะที่จำเป็น)
+
+---
+
+---  
+
+### 🎯 ตัวอย่างที่ 1: ใช้ `spread` กับ Object (เปลี่ยนค่าผู้ใช้แบบ immutable)
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: `
+    <p>ชื่อ: {{ user.name }}</p>
+    <p>อายุ: {{ user.age }}</p>
+    <button (click)="changeName()">เปลี่ยนชื่อ</button>
+  `
+})
+export class AppComponent {
+  user = { name: 'John', age: 25 };
+
+  // ✅ ใช้ spread operator เพื่อสร้าง object ใหม่
+  changeName() {
+    this.user = { ...this.user, name: 'Jane' };
+    // user = { name: 'Jane', age: 25 }
+  }
+}
+```
+
+#### 🧠 ถ้าใช้ `OnPush`:
+- Angular จะตรวจว่า input เปลี่ยน (เพราะ object reference ใหม่)
+- จึง update UI ได้แน่นอน
+
+---
+
+### 🎯 ตัวอย่างที่ 2: ใช้ `spread` กับ Array (เพิ่ม item ใหม่แบบ immutable)
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: `
+    <ul>
+      <li *ngFor="let todo of todos">{{ todo }}</li>
+    </ul>
+    <button (click)="addTodo()">เพิ่มงาน</button>
+  `
+})
+export class AppComponent {
+  todos = ['ซื้อข้าว', 'ล้างจาน'];
+
+  addTodo() {
+    this.todos = [...this.todos, 'ไปออกกำลังกาย'];
+    // todos = ['ซื้อข้าว', 'ล้างจาน', 'ไปออกกำลังกาย']
+  }
+}
+```
+
+> ✅ Angular เห็น array ใหม่ (เพราะ spread แล้วได้ array ใหม่)  
+> → จึง render `*ngFor` ใหม่เฉพาะที่จำเป็น
+
+---
+
+## 🔄 เปรียบเทียบ: `spread` vs `mutation`
+
+| แบบเปลี่ยนค่าเดิม (❌) | แบบ immutable ด้วย spread (✅) |
+|---------------------|-------------------------------|
+| `this.user.name = 'Jane'` | `this.user = { ...this.user, name: 'Jane' }` |
+| `this.todos.push('A')` | `this.todos = [...this.todos, 'A']` |
+
+---
+
+
+---   
+
+
 
 ## Declare property `String`
 
@@ -100,7 +357,27 @@ firstName.set("Jaime");
 // You can also use the `update` method to change the value
 // based on the previous value.
 firstName.update((name) => name.toUpperCase());
-```
+```  
+
+In Angular's Signals API, the `signal()` function can take an optional `CreateSignalOptions` object as its second argument. This object allows you to configure the signal's behavior. Here's an example of how to use it:  
+
+`signal(initialValue: unknown, options?: CreateSignalOptions<unknown> | undefined): WritableSignal<unknown>`  
+
+```ts
+import { signal } from '@angular/core';
+
+// Create a signal with initial value and options
+const count = signal(0, {
+  equal: (a, b) => a === b, // Custom equality function
+});
+```  
+
+```ts
+const user = signal({ name: 'Alice' }, {
+  equal: (a, b) => a.name === b.name, // Only compare the 'name' property
+});
+```  
+
 
 ## Computed expressions
 
@@ -118,7 +395,18 @@ console.log(firstNameCapitalized()); // MORGAN
 firstName.set("Jaime");
 
 console.log(firstNameCapitalized()); // JAIME
-```
+```  
+
+> เหมือน if statement ; ถ้า A เปลี่ยน B จะทำอะไรบางอย่าง โดยอ้างอิงจากค่า ของ A  
+
+### [Computed signal dependdencies are dynamic](https://angular.dev/guide/signals#computed-signal-dependencies-are-dynamic)  
+
+Only the signals actually read during the derivation are tracked. For example, in this `computed` the `count` signal is only read if the `showCount` signal is true:  
+
+```ts
+
+```  
+
 
 ## Showing dynamic text
 
@@ -392,6 +680,9 @@ json-server --watch db.json
 ```  
 
 5. In your web browser, navigate to the `http://localhost:3000/locations` and confirm that the response includes the data stored in `db.json`.  
+
+
+---   
 
 
 

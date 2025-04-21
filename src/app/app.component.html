@@ -1,3 +1,25 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
+<h1 class="text-h"> count is
+  <span class="text-h">
+    {{count()}}
+  </span>
 </h1>
+
+<h1 class="text-6xl font-bold">
+  <span class="text-h">
+    {{conditionCount()}}
+  </span>
+</h1>
+
+<button class="btn-primary" 
+
+  (click)="handlerClicked()"
+>
+  Increment
+</button>
+
+<button class="btn-primary" 
+
+  (click)="handleIsShow()"
+  >
+    Is Show Count
+</button>
