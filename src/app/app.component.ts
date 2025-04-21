@@ -91,13 +91,4 @@ export class AppComponent {
     }
   }
 
-  clearPlaceholder(inputElement: HTMLInputElement) {
-    inputElement.placeholder = '';
-  }
-
-  restorePlaceholder(inputElement: HTMLInputElement) {
-    if (!inputElement.value) {
-      inputElement.placeholder = this.placehoderText;
-    }
-  }
 }
