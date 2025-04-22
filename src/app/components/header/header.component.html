@@ -1,9 +1,9 @@
 <header class="grid grid-cols-[5%_1fr_5%]  bg-gray-100">
     <div></div>
-    <div class="grid grid-cols-[30%_1fr_15%] py-6 ">
-        <h1 class="text-2xl font-bold text-slate-600"><a routerLink="{{brandLogoLink}}">{{ brandLogo }}</a></h1>
+    <div class="grid grid-cols-[30%_1fr_15%] py-3">
+        <h1 class="text-2xl text-slate-600 hover:text-slate-500 font-extrabold"><a routerLink="{{brandLogoLink}}">{{ brandLogo }}</a></h1>
         <div class="grid justify-items-end">
-            <ul class="text-lg  flex gap-4">
+            <ul class="text-lg  flex gap-4 font-extrabold">
 
                 @for (menu of menus; track menu.id) {
                 <li class="grid place-items-center hover:text-gray-500"><a
@@ -17,5 +17,4 @@
         </div>
     </div>
     <div></div>
-
 </header>
