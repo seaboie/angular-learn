@@ -40,6 +40,9 @@ export class AppComponent {
 ```  
 > ` app.component.html `  
 
+1. ` routerLink ` in `<a routerLink=""></a>`  ต้อง `import {RouterLink, RouterOutlet}`  
+
+2. ` <router-outlet /> ` คือ ที่ๆจะแสดง View page  
 ```html
 <h1>Angular Router App</h1>
 <nav>
