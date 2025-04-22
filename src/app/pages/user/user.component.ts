@@ -8,7 +8,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input() id!: string;
-
   
+  @Input() id!: string;
 }

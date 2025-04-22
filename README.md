@@ -4,6 +4,28 @@
 
 ## Define basic route  
 
+> ` app.config.ts `  
+
+Add the ` withComponentInputBinding() ` feature to the provideRouter method.  
+
+```ts
+providers: [
+  provideRouter(appRoutes, withComponentInputBinding()),
+]
+```  
+
+```ts
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
+
+import { routes } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes, withComponentInputBinding()), provideClientHydration(withEventReplay())]
+};
+```  
+
 > ` app.routes.ts `  
 
 ```ts
@@ -40,6 +62,9 @@ export class AppComponent {
 ```  
 > ` app.component.html `  
 
+1. ` routerLink ` in `<a routerLink=""></a>`  ต้อง `import {RouterLink, RouterOutlet}`  
+
+2. ` <router-outlet /> ` คือ ที่ๆจะแสดง View page  
 ```html
 <h1>Angular Router App</h1>
 <nav>
@@ -51,3 +76,6 @@ export class AppComponent {
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet />
 ```  
+
+## Example  
+
