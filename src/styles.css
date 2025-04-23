@@ -1,22 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import "tailwindcss";
-
-@import "./styles/fonts.css";
+@import './styles/fonts.css';
 
 @theme {
-  --font-display: "Oswald", "sans-serif";
-  --font-kanit: "Kanit", "sans-serif";
-  --font-prompt: "Prompt", "san-serif";
+    --btn-p: "btn-primary";
+    --font-prompt: "Prompt";
+    --font-kanit: "Kanit"
 }
 body {
-  font-family: "Prompt", sans-serif;
+  /* font-family: 'Prompt'; */
+  font-family: 'Kanit';
+  letter-spacing: 0.4px;
 }
 :root {
-  --primary-color: #605dc8;
-  --secondary-color: #8b89e6;
+  --primary-color: #605DC8;
+  --secondary-color: #8B89E6;
   --accent-color: #e8e7fa;
-  --shadow-color: #e8e8e8;
+  --shadow-color: #E8E8E8;
 }
 
 .dropdown {
