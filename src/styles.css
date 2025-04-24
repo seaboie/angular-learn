@@ -1,2 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@import './styles/fonts.css';
+
+@theme {
+    /* Fonts */
+    --font-prompt: "Prompt";
+    --font-kanit: "Kanit";
+
+    /*  Define color */
+    --color-default: var(--default-color);
+    --color-primary: var(--primary-color);
+    --color-secondary: var(--secondary-color);
+    --color-tertiary: var(--tertiary-color);
+    --color-accent: var(--accent-color);
+    --color-surface: var(--surface-color);
+    --color-error: var(--error-color);
+    --color-shadow: var(--shadow-color);
+    --color-outline: var(--outline-color);
+
+}
+body {
+  /* font-family: 'Prompt'; */
+  font-family: 'Prompt';
+  letter-spacing: 0.4px;
+}
+:root {
+  /* 1. Declare variables colors */
+  --default-color: #3b1b1b;
+  --primary-color: #484851;
+  --on-primary-color: #FFFFFF;
+  --primary-container-color: #D0BCFF;
+  --on-primary-container-color: #1F2937;
+  --secondary-color: #8B89E6;
+  --on-secondary-color: #FFFFFF;
+  --secondary-container-color: #C4B5FD;
+  --on-secondary-container-color: #1F2937;
+  --surface-color: #0548f1;
+  --on-surface-color: #1F2937;
+  --tertiary-color: #0b0be6;
+  --on-tertiary-color: #FFFFFF;
+  --background-color: #FFFFFF;
+  --on-background-color: #1F2937;
+  --error-color: #B00020;
+  --on-error-color: #FFFFFF;
+  --accent-color: #dfdb1e;
+  --shadow-color: #E8E8E8;
+  --outline-color: #3a3737;
+}
+
+.dropdown {
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[310px] flex flex-col gap-2 justify-end items-end;
+}
+
+.dropdown_link {
+  @apply text-sm text-gray-700 hover:text-gray-500 font-medium;
+}
+
+.text_gradient {
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+}
+
+.btn-primary {
+  @apply my-3 bg-blue-500 hover:opacity-90 text-white w-full px-5 py-2 border rounded-xl shadow-md cursor-pointer;
+}
+
+.input-nice {
+  @apply w-full my-10 px-4 py-2 border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all placeholder-gray-300;
+}
