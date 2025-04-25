@@ -1,12 +1,24 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'tutorial';
+  title: string = 'This loaded dynamically ไดนามิก โหลด';
+  one: number = 1;
+  imgUrl: string = 'https://miro.medium.com/v2/resize:fit:1400/0*kuPL9dUjkbE3RqLg.png';
+  
+  // disable
+  isDisable: boolean = false;
+
+  // isActive
+  isActive: boolean = false;
+
+  // string condition
+  fruitName: string = 'Apple';
 }

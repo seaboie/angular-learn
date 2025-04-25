@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import './styles/fonts.css';
+
+@theme {
+    --btn-p: "btn-primary";
+    --font-prompt: "Prompt";
+    --font-kanit: "Kanit"
+}
+body {
+  /* font-family: 'Prompt'; */
+  font-family: 'Kanit';
+  letter-spacing: 0.4px;
+}
+:root {
+  --primary-color: #605DC8;
+  --secondary-color: #8B89E6;
+  --accent-color: #e8e7fa;
+  --shadow-color: #E8E8E8;
+}
+
+.dropdown {
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[310px] flex flex-col gap-2 justify-end items-end;
+}
+
+.dropdown_link {
+  @apply text-sm text-gray-700 hover:text-gray-500 font-medium;
+}
+
+.text_gradient {
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+}
+
+.btn-primary {
+  @apply my-3 bg-blue-500 hover:opacity-90 text-white w-full px-5 py-2 border rounded-xl shadow-md cursor-pointer;
+}
+
+.input-nice {
+  @apply w-full my-10 px-4 py-2 border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all;
+}

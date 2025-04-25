@@ -61,7 +61,7 @@ body {
 }
 
 .btn-primary {
-  @apply my-3 bg-blue-500 hover:opacity-90 text-white w-full px-5 py-2 border rounded-xl shadow-md cursor-pointer;
+  @apply my-3 bg-blue-500 hover:opacity-90 text-white w-full px-5 py-2 border rounded-xl shadow-md cursor-pointer disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed active:bg-indigo-700;
 }
 
 .input-nice {

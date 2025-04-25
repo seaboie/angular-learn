@@ -1,0 +1,23 @@
+.fontsize {
+    font-size: 100px;
+}
+
+.active {
+    background-color: yellow;
+}
+
+.no-active {
+    background-color: red;
+}
+.active-border {
+    border: 5px solid red;
+}
+
+.no-active-border {
+    border: 5px solid yellow;
+}
+
+.apple {
+    background-color: blue;
+    border: 5px solid yellow;
+}

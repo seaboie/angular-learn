@@ -1,59 +1,74 @@
 # Tutorial
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+## 🛠️ 🛠️ 🛠️ Class binding  
 
-## Development server
+The `[class.classname]` binding in Angular is used to add or remove a CSS class based on a boolean condition, not to directly set style properties like font size.
 
-To start a local development server, run:
+Here are a few correct ways to achieve what you might be trying to do:
 
-```bash
-ng serve
+### Option 1: Conditional class application
+If you want to apply a class "fontsize" when a condition is true:
+```html
+<button [class.fontsize]="isActive">Active</button>
+```
+And in your CSS:
+```css
+.fontsize {
+  font-size: 28px;
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+### Option 2: Direct style binding
+If you want to directly set the font size:
+```html
+<button [style.font-size.px]="28">Active</button>
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+### Option 3: NgClass for multiple conditions
+For more complex class logic:
+```html
+<button [ngClass]="{'fontsize': isActive}">Active</button>
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+### Option 4: Inline style (not recommended for complex styling)
+```html
+<button style="font-size: 28px">Active</button>
 ```
+---  
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🛠️ 🛠️ 🛠️ Using `[ngStyle]` or `[ngClass]`  
 
-## Running unit tests
+You can also use the `[ngStyle]` or `[ngClass]` directive to set multiple styles or classes:  
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+```html
+<button [ngStyle]="{'font-size': '28px'}">Active</button>
+<button [ngClass]="{'fontsize': condition}">Active</button>
+```  
+🔥 🔥 🔥 Make sure to define the `fontsize` class in your CSS if you're using the `[class]` or `[ngClass]` directive:  
 
-```bash
-ng test
-```
+```css
+.fontsize {
+  font-size: 28px;
+}
+```  
 
-## Running end-to-end tests
+### Use Ternary operator  
 
-For end-to-end (e2e) testing, run:
+```html
+<button [class]="isActive ? 'active active-border' : 'no-active no-active-border'">Is Active</button>
+```  
 
-```bash
-ng e2e
-```
+### Simple  
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+```html
+<button 
+    [class.active]="isActive" 
+    [class.no-active]="!isActive"
+    [class.active-border]="isActive"
+    [class.no-active-border]="!isActive"
+>Is Active</button>
+<br>
+```  
 
-## Additional Resources
+---    
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
