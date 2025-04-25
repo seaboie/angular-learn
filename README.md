@@ -22,6 +22,11 @@ And in your CSS:
 If you want to directly set the font size:
 ```html
 <button [style.font-size.px]="28">Active</button>
+<button 
+    [style.backgroundColor]="isActive ? 'red' : 'blue'"
+    [style.border]="isActive ? '3px solid blue' : ''"
+>Style CSS</button>
+
 ```
 
 ### Option 3: NgClass for multiple conditions
@@ -30,11 +35,6 @@ For more complex class logic:
 <button [ngClass]="{'fontsize': isActive}">Active</button>
 ```
 
-### Option 4: Inline style (not recommended for complex styling)
-```html
-<button style="font-size: 28px">Active</button>
-```
----  
 
 ## 🛠️ 🛠️ 🛠️ Using `[ngStyle]` or `[ngClass]`  
 

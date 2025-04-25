@@ -17,7 +17,7 @@ export class AppComponent {
   isDisable: boolean = false;
 
   // isActive
-  isActive: boolean = false;
+  isActive: boolean = true;
 
   // string condition
   fruitName: string = 'Apple';

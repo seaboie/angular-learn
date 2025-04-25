@@ -36,6 +36,11 @@
     <!-- Style binding -->
     <button [style.font-size.px]="58">style</button>
     <br>
+    <button 
+        [style.backgroundColor]="isActive ? 'red' : 'blue'"
+        [style.border]="isActive ? '3px solid blue' : ''"
+    >Style CSS</button>
+    <br>
 
     <!-- Ng binding -->
     <button [ngStyle]="{'font-size': '58px'}">ngStyle</button>
