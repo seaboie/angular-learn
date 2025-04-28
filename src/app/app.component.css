@@ -3,7 +3,8 @@
 }
 
 .active {
-    background-color: yellow;
+    background-color: red;
+    border: 3px solid blue;
 }
 
 .no-active {

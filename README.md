@@ -62,6 +62,13 @@ You can also use the `[ngStyle]` or `[ngClass]` directive to set multiple styles
 
 ```html
 <button 
+    [style.background]="isActive ? 'red' : 'yellow'"
+    [style.border]="isActive ? '3px solid yellow' : '3px solid red'"
+>
+```  
+
+```html
+<button 
     [class.active]="isActive" 
     [class.no-active]="!isActive"
     [class.active-border]="isActive"

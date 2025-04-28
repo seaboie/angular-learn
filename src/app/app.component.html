@@ -42,6 +42,15 @@
     >Style CSS</button>
     <br>
 
+    <button 
+        [style.background]="isActive ? 'red' : 'yellow'"
+        [style.border]="isActive ? '3px solid yellow' : '3px solid red'"
+    >
+    Click new
+    </button>
+
+    <br>
+
     <!-- Ng binding -->
     <button [ngStyle]="{'font-size': '58px'}">ngStyle</button>
     <br>
@@ -50,4 +59,10 @@
 
     <!-- String conditional -->
      <button [class.apple]="fruitName === 'Apple'">Fruit string</button>
+
+     <br>
+     <!-- Class Binding -->
+
+     <button [class.active]="isActive">Class binding</button>
+      
 </div>
