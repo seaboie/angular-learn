@@ -1,24 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   imports: [CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title: string = 'This loaded dynamically ไดนามิก โหลด';
-  one: number = 1;
-  imgUrl: string = 'https://miro.medium.com/v2/resize:fit:1400/0*kuPL9dUjkbE3RqLg.png';
-  
-  // disable
-  isDisable: boolean = false;
+  title: string = 'Event Binding';
 
-  // isActive
-  isActive: boolean = true;
+  // Method
+  buttonClick() {
+    alert('Button has been clicked ...');
+  }
 
-  // string condition
-  fruitName: string = 'Apple';
+  keyEnter(event: KeyboardEvent) {
+    const eventDetail = {
+      key: event.key,
+      code: event.code,
+      ctrlKey: event.ctrlKey,
+      shiftKey: event.shiftKey,
+      altKey: event.altKey,
+      metaKey: event.metaKey,
+      type: event.type,
+    };
+    alert('Pressed key : Enter Enter Enter' + JSON.stringify(eventDetail, null, 2));
+    console.log(event);
+  }
+
+  keyUpEntering() {
+    console.log('Keyup Entering');
+    
+  }
 }

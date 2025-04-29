@@ -2,6 +2,10 @@
     font-size: 100px;
 }
 
+.space {
+    padding: 10px;
+}
+
 .active {
     background-color: red;
     border: 3px solid blue;

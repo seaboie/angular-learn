@@ -1,68 +1,40 @@
 <div class=" p-20">
     <h1>First Angular App</h1>
     <h2>{{ title }}</h2>
-    <p>{{ one + one }}</p>
-    <p>One + One is {{ one + one }}</p>
-    <p>{{ 1 + 1 }}</p>
+    
 
     <!--  -->
-    <img src="{{imgUrl}}" alt="">
-    <img [src]="imgUrl" alt="">
-
-    <!-- Button disable string interpolation -->
-    <button disabled="{{isDisable}}" class="btn-primary">disable string interpolation</button>
-    <br>
-
-    <!-- Button diable property binding -->
-    <button [disabled]="isDisable" class="btn-primary">disable property binding</button>
-    <br>
-
-    <!-- Class binding -->
-    <!-- isActive -->
-     <button 
-        [class.active]="isActive" 
-        [class.no-active]="!isActive"
-        [class.active-border]="isActive"
-        [class.no-active-border]="!isActive"
-    >Is Active</button>
-    <br>
     
-    <button [class]="isActive ? 'active active-border' : 'no-active no-active-border'">Is Active</button>
-    <h2>This achieves the same result by using a ternary operator to conditionally apply all classes at once. The active state gets both 'active' and 'active-border' classes, while the inactive state gets 'no-active' and 'no-active-border'.</h2>
+     <div class="space"></div>
+
+     <hr>
+     <div class="space"></div>
+     
+    <button (click)="buttonClick()">Button Click show Alert</button>
+
+    <div class="space"></div>
+    <hr>
+    <div class="space"></div>
+
+    <button (mouseover)="buttonClick()">Mouse Hover Show Alert</button>
 
     <hr>
+    <div class="space"></div>
+
+    <input type="text" (keyup)="keyEnter($event)" class="input-nice" placeholder="keyEnter">
+
+    <hr>
+    <div class="space"></div>
+
+    <input type="text" placeholder="Key up" class="input-nice" (keyup)="keyEnter($event)">
+
+    <hr>
+    <div class="space"></div>
+
+    <input type="text" placeholder="Key up Entering" class="input-nice" (keyup.enter)="keyUpEntering()">
+    
+    <input type="text" placeholder="Key up a" class="input-nice" (keyup.a)="keyUpEntering()">
 
 
-    <!-- Style binding -->
-    <button [style.font-size.px]="58">style</button>
-    <br>
-    <button 
-        [style.backgroundColor]="isActive ? 'red' : 'blue'"
-        [style.border]="isActive ? '3px solid blue' : ''"
-    >Style CSS</button>
-    <br>
-
-    <button 
-        [style.background]="isActive ? 'red' : 'yellow'"
-        [style.border]="isActive ? '3px solid yellow' : '3px solid red'"
-    >
-    Click new
-    </button>
-
-    <br>
-
-    <!-- Ng binding -->
-    <button [ngStyle]="{'font-size': '58px'}">ngStyle</button>
-    <br>
-    <button [ngClass]="{'fontsize': isActive}">ngClass</button>
-    <br>
-
-    <!-- String conditional -->
-     <button [class.apple]="fruitName === 'Apple'">Fruit string</button>
-
-     <br>
-     <!-- Class Binding -->
-
-     <button [class.active]="isActive">Class binding</button>
       
 </div>

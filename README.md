@@ -1,81 +1,30 @@
 # Tutorial
 
-## 🛠️ 🛠️ 🛠️ Class binding  
+## 🛠️ 🛠️ 🛠️ Event Binding
 
-The `[class.classname]` binding in Angular is used to add or remove a CSS class based on a boolean condition, not to directly set style properties like font size.
+> ts
 
-Here are a few correct ways to achieve what you might be trying to do:
+```ts
+export class AppComponent {
+  title: string = "Event Binding";
 
-### Option 1: Conditional class application
-If you want to apply a class "fontsize" when a condition is true:
-```html
-<button [class.fontsize]="isActive">Active</button>
-```
-And in your CSS:
-```css
-.fontsize {
-  font-size: 28px;
+  // Method
+  buttonClick() {
+    alert("Button has been clicked ...");
+  }
 }
 ```
 
-### Option 2: Direct style binding
-If you want to directly set the font size:
-```html
-<button [style.font-size.px]="28">Active</button>
-<button 
-    [style.backgroundColor]="isActive ? 'red' : 'blue'"
-    [style.border]="isActive ? '3px solid blue' : ''"
->Style CSS</button>
+> html
 
+```html
+<button (click)="buttonClick()">Button Click show Alert</button>
+
+<button (mouseover)="buttonClick()">Mouse Hover Show Alert</button>
+
+<input type="text" (keyup)="keyEnter()" class="input-nice" placeholder="keyEnter" />
+
+<input type="text" placeholder="Key up Entering" (keyup.enter)="keyUpEntering()" />
+
+<input type="text" placeholder="Key up a" (keyup.a)="keyUpEntering()" />
 ```
-
-### Option 3: NgClass for multiple conditions
-For more complex class logic:
-```html
-<button [ngClass]="{'fontsize': isActive}">Active</button>
-```
-
-
-## 🛠️ 🛠️ 🛠️ Using `[ngStyle]` or `[ngClass]`  
-
-You can also use the `[ngStyle]` or `[ngClass]` directive to set multiple styles or classes:  
-
-```html
-<button [ngStyle]="{'font-size': '28px'}">Active</button>
-<button [ngClass]="{'fontsize': condition}">Active</button>
-```  
-🔥 🔥 🔥 Make sure to define the `fontsize` class in your CSS if you're using the `[class]` or `[ngClass]` directive:  
-
-```css
-.fontsize {
-  font-size: 28px;
-}
-```  
-
-### Use Ternary operator  
-
-```html
-<button [class]="isActive ? 'active active-border' : 'no-active no-active-border'">Is Active</button>
-```  
-
-### Simple  
-
-```html
-<button 
-    [style.background]="isActive ? 'red' : 'yellow'"
-    [style.border]="isActive ? '3px solid yellow' : '3px solid red'"
->
-```  
-
-```html
-<button 
-    [class.active]="isActive" 
-    [class.no-active]="!isActive"
-    [class.active-border]="isActive"
-    [class.no-active-border]="!isActive"
->Is Active</button>
-<br>
-```  
-
----    
-
