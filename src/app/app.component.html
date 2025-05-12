@@ -1,17 +1,11 @@
 <div class=" p-20">
     <h1>First Angular App</h1>
-    <h2>{{ title }}</h2>
-    
+    <h2>{{ userName }}</h2>
 
     <!--  -->
-    
-     <div class="space"></div>
 
-     
-    
-    <!-- <input type="text" placeholder="Key up ENTER" class="input-nice" (keyup.enter)="keyUpEntering(user)" #user id="userInput"> -->
-     <input class="input-nice" type="text" placeholder="key up Enter" (keyup.enter)="keyUpEntering(user)" #user id="userInput">
+    <div class="space"></div>
 
+    <input class="input-nice" type="text" [(ngModel)]="userName">
 
-      
 </div>

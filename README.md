@@ -1,28 +1,28 @@
 # Tutorial
 
-## 🛠️ 🛠️ 🛠️ Event Binding
+## 🛠️ 🛠️ 🛠️ Two way Data Binding
 
 > ts
 
 ```ts
+@Component({
+  selector: 'app-root',
+  imports: [CommonModule, FormsModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
 export class AppComponent {
-  title: string = 'Event Binding';
+  userName: string = "John Doe";
 
-  // Method
-  keyUpEntering(user: HTMLInputElement) {
-    console.log(user.value);
-    user.value = "";
-    
-  }
 }
 ```
 
 > html
 
 ```html
-     <input class="input-nice" type="text" placeholder="key up Enter" (keyup.enter)="keyUpEntering(user)" #user id="userInput">
+<input class="input-nice" type="text" [(ngModel)]="userName">
 ```  
 
-- Declare `#user` variable Template  
-- in Method`(keyup.enter)="keyUpEntering(user)"` insert parameter `user`  
-- Use `user` for get `value`  
+- Import `FormsModule` to `.ts` file
+- Use `[(ngModel)]=""`  
+- Use variable that declare from `.ts` in `html` file : `[(ngModel)]="userName"`

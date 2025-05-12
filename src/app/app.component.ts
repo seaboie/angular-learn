@@ -1,20 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title: string = 'Event Binding';
+  userName: string = "John Doe";
 
-  // Method
-
-  keyUpEntering(user: HTMLInputElement) {
-    console.log(user.value);
-    user.value = "";
-    
-  }
 }
