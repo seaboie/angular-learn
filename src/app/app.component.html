@@ -6,6 +6,13 @@
 
     <div class="space"></div>
 
-    <input class="input-nice" type="text" [(ngModel)]="userName">
+    <!-- One way data binding -->
+    <input class="input-nice" type="text" [value]="textValue" (keyup.enter)="onKeyUp()">
+
+
+    <div class="space"></div>
+
+    <!-- Two way data binding -->
+     <input class="input-nice" type="text" [(ngModel)]="textValue" (keyup.enter)="onKeyUp()">
 
 </div>

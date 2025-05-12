@@ -11,4 +11,11 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   userName: string = "John Doe";
 
+  textValue: string = 'Value is coming from component';
+
+  // Method
+  onKeyUp() {
+    console.log(this.textValue);
+    
+  }
 }
