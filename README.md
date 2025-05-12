@@ -42,7 +42,3 @@ export class AppComponent {
 </div>
 ```  
 
-- One way data binding cannot send data from `html` to `.ts`  
-- Import `FormsModule` to `.ts` file
-- Use `[(ngModel)]=""`  
-- Use variable that declare from `.ts` in `html` file : `[(ngModel)]="userName"`
