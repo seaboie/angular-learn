@@ -29,8 +29,14 @@ export class AppComponent {
     console.log(event);
   }
 
-  keyUpEntering() {
-    console.log('Keyup Entering');
+  // keyUpEntering(user: HTMLInputElement) {
+  //   console.log(user.id);
+    
+  // }
+
+  keyUpEntering(user: HTMLInputElement) {
+    console.log(user.value);
+    user.value = "";
     
   }
 }

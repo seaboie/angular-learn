@@ -7,33 +7,10 @@
     
      <div class="space"></div>
 
-     <hr>
-     <div class="space"></div>
      
-    <button (click)="buttonClick()">Button Click show Alert</button>
-
-    <div class="space"></div>
-    <hr>
-    <div class="space"></div>
-
-    <button (mouseover)="buttonClick()">Mouse Hover Show Alert</button>
-
-    <hr>
-    <div class="space"></div>
-
-    <input type="text" (keyup)="keyEnter($event)" class="input-nice" placeholder="keyEnter">
-
-    <hr>
-    <div class="space"></div>
-
-    <input type="text" placeholder="Key up" class="input-nice" (keyup)="keyEnter($event)">
-
-    <hr>
-    <div class="space"></div>
-
-    <input type="text" placeholder="Key up Entering" class="input-nice" (keyup.enter)="keyUpEntering()">
     
-    <input type="text" placeholder="Key up a" class="input-nice" (keyup.a)="keyUpEntering()">
+    <!-- <input type="text" placeholder="Key up ENTER" class="input-nice" (keyup.enter)="keyUpEntering(user)" #user id="userInput"> -->
+     <input class="input-nice" type="text" placeholder="key up Enter" (keyup.enter)="keyUpEntering(user)" #user id="userInput">
 
 
       
