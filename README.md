@@ -2,7 +2,8 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
-## On Youtube
+## On Youtube  
+[Angular Full Course (Part 1) Complete Zero to Hero Angular full Tutorial](https://youtu.be/QIvH6rTysn0?si=3GWFEHbkfatsa8tT)  
 
 [Modern Angular 19 Crash Course - E-commerce App!](https://www.youtube.com/watch?v=RNr1QZM4A38)  
 
