@@ -6,11 +6,13 @@
 
 ```ts
 export class AppComponent {
-  title: string = "Event Binding";
+  title: string = 'Event Binding';
 
   // Method
-  buttonClick() {
-    alert("Button has been clicked ...");
+  keyUpEntering(user: HTMLInputElement) {
+    console.log(user.value);
+    user.value = "";
+    
   }
 }
 ```
@@ -18,13 +20,9 @@ export class AppComponent {
 > html
 
 ```html
-<button (click)="buttonClick()">Button Click show Alert</button>
+     <input class="input-nice" type="text" placeholder="key up Enter" (keyup.enter)="keyUpEntering(user)" #user id="userInput">
+```  
 
-<button (mouseover)="buttonClick()">Mouse Hover Show Alert</button>
-
-<input type="text" (keyup)="keyEnter()" class="input-nice" placeholder="keyEnter" />
-
-<input type="text" placeholder="Key up Entering" (keyup.enter)="keyUpEntering()" />
-
-<input type="text" placeholder="Key up a" (keyup.a)="keyUpEntering()" />
-```
+- Declare `#user` variable Template  
+- in Method`(keyup.enter)="keyUpEntering(user)"` insert parameter `user`  
+- Use `user` for get `value`  
