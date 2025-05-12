@@ -10,5 +10,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   isLoggedIn: boolean = false;
+
+  isAdmin: boolean = true;
+  isMember: boolean = false;
+  isGuest: boolean = false;
+
   userName: string = 'John Doe';
 }
