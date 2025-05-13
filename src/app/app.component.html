@@ -1,18 +1,23 @@
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">String Conditions : *ngIf</h1>
+    <h1 class="font-semibold text-2xl">ng-template-outlet</h1>
     
-    <h4 *ngIf="userRole == 'Admin'; else memberMessage">Welcome Admin</h4>
-    <ng-template #memberMessage>
-        <h4>Welcome Member</h4>
+    <ng-template #getButton>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <hr>
     </ng-template>
 
-    <!-- @if , @else -->
-     <hr>
-
-     @if (userRole == 'Admin') {
-        <h4>Welcome Admin</h4>
-     } @else if (userRole == 'Member') {
-        <h4>Welcome Member</h4>
-     }
+    <div [ngTemplateOutlet]="getButton">x
+        <h5>Sidebar</h5>
+    </div>
+    <div [ngTemplateOutlet]="getButton">
+        <h5>Hero</h5>
+    </div>
+    <div [ngTemplateOutlet]="getButton">
+        <h5>Footer</h5>
+    </div>
 
 </div>

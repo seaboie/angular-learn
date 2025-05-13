@@ -4,42 +4,49 @@
 
 [Angular 18 Full Course (part 7) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=R3y1FvJihUE&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=24)
 
-## 🛠️ 🛠️ 🛠️ ngIf & @if & @else Number
+## 🛠️ 🛠️ 🛠️ ng-template-outlet
 
 > ts
 
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgTemplateOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
-
-  userRole: string = "Member";
-}
+export class AppComponent {}
 ```
 
 > html
 
 ```html
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">String Conditions : *ngIf</h1>
+    <h1 class="font-semibold text-2xl">ng-template-outlet</h1>
     
-    <h4 *ngIf="userRole == 'Admin'; else memberMessage">Welcome Admin</h4>
-    <ng-template #memberMessage>
-        <h4>Welcome Member</h4>
+    <ng-template #getButton>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <button class="btn-primary">Join now</button>
+        <hr>
     </ng-template>
 
-    <!-- @if , @else -->
-     <hr>
-
-     @if (userRole == 'Admin') {
-        <h4>Welcome Admin</h4>
-     } @else if (userRole == 'Member') {
-        <h4>Welcome Member</h4>
-     }
+    <div [ngTemplateOutlet]="getButton">
+        <h5>Sidebar</h5>
+    </div>
+    <div [ngTemplateOutlet]="getButton">
+        <h5>Hero</h5>
+    </div>
+    <div [ngTemplateOutlet]="getButton">
+        <h5>Footer</h5>
+    </div>
 
 </div>
-```
+```  
+
+- import `NgTemplateOutlet`  
+- Use for reuse : `<ng-template></ng-template>`  
+- Call it : `<div [ngTemplateOutlet]="getButton">`  
+- `<ng-template></ng-template>` will used in `<div [ngTemplateOutlet]="getButton">...</div>` by call `variable template` : `#getButton`  
