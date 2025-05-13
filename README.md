@@ -2,51 +2,51 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 7) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=R3y1FvJihUE&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=24)
+[Angular 18 Full Course (part 9) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=m2z04vfaseg&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)
 
-## 🛠️ 🛠️ 🛠️ ng-template-outlet
+## 🛠️ 🛠️ 🛠️ ngFor , @for : Array
 
 > ts
 
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, NgTemplateOutlet],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {}
+export class AppComponent {
+  users: Array<string> = ["John", "Sam", "Smith", "Jenifier"];
+}
 ```
 
 > html
 
 ```html
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">ng-template-outlet</h1>
-    
-    <ng-template #getButton>
-        <button class="btn-primary">Join now</button>
-        <button class="btn-primary">Join now</button>
-        <button class="btn-primary">Join now</button>
-        <button class="btn-primary">Join now</button>
-        <button class="btn-primary">Join now</button>
-        <hr>
-    </ng-template>
+    <h1 class="font-semibold text-2xl">*ngFor="" </h1>
 
-    <div [ngTemplateOutlet]="getButton">
-        <h5>Sidebar</h5>
-    </div>
-    <div [ngTemplateOutlet]="getButton">
-        <h5>Hero</h5>
-    </div>
-    <div [ngTemplateOutlet]="getButton">
-        <h5>Footer</h5>
-    </div>
+    <h2 *ngFor="let user of users">{{user}}</h2>
+
+    <hr>
+    <ul>
+        <li *ngFor="let user of users">{{user}}</li>
+    </ul>
+    <hr>
+
+    <h1 class="font-semibold text-2xl">&#64;for </h1>
+
+    @for (user of users; track user) {
+        <h3>{{user}} - loading use &#64;for</h3>
+    }
+
+    <hr>
+    <ul>
+        @for (user of users; track user) {
+            <li>{{user}}</li>
+        }
+    </ul>
 
 </div>
 ```  
 
-- import `NgTemplateOutlet`  
-- Use for reuse : `<ng-template></ng-template>`  
-- Call it : `<div [ngTemplateOutlet]="getButton">`  
-- `<ng-template></ng-template>` will used in `<div [ngTemplateOutlet]="getButton">...</div>` by call `variable template` : `#getButton`  
