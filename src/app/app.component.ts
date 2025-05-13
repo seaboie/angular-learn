@@ -4,16 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, NgIf],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  isLoggedIn: boolean = false;
 
-  isAdmin: boolean = true;
-  isMember: boolean = false;
-  isGuest: boolean = false;
+  loginCount: number = 0;
+  
+  countLoginAttempts() {
+    this.loginCount!++;
+  }
 
-  userName: string = 'John Doe';
+  resetLoginAttempts() {
+    this.loginCount = 0;
+  }
 }

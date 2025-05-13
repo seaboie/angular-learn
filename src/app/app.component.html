@@ -1,28 +1,23 @@
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">Multiple Conditions</h1>
+    <h1 class="font-semibold text-2xl">Number Conditions : *ngIf</h1>
+    <h2 *ngIf="loginCount < 4">{{loginCount}}</h2>
 
-    <h4 *ngIf="isAdmin">Welcome Admin</h4>
+    <button class="btn-primary" (click)="countLoginAttempts()" [disabled]="loginCount > 3">Log In</button>
 
-    <ng-template #adminMessage>
-        <h4 *ngIf="isAdmin; else memberMessage">Welcome Admin</h4>
-    </ng-template>
-    <ng-template #memberMessage>
-        <h4 *ngIf="isMember; else guestMessage">Welcome Member</h4>
-    </ng-template>
-    <ng-template #guestMessage>
-        <h4 *ngIf="isGuest; else adminMessage ">Welcome Guest</h4>
-    </ng-template>
+    <h4 *ngIf="loginCount > 3">Exceeded 3 login Attempts !!! Try again later</h4>
+    <button class="btn-primary" (click)="resetLoginAttempts()" *ngIf="loginCount > 3">Reset</button>
 
     <hr>
+    <!--  -->
+    <h1 class="font-semibold text-2xl">Number Conditions : &#64;if</h1>
 
-    <!-- @if, @else -->
-
-    @if (isAdmin) {
-        <h4>Welcome Admin</h4>
-    } @else if (isMember) {
-        <h4>Welcome Member</h4>
-    } @else if (isGuest) {
-        <h4>Welcom Guest</h4>
+    @if (loginCount < 4) {
+        <button class="btn-primary" (click)="countLoginAttempts()">Login Syntax</button>
+    } @else {
+        <button class="btn-primary" disabled>Login SynTax</button>
     }
 
+    @if (loginCount > 3) {
+        <h4>Exceeded 3 login Attempts !!! Try again later</h4>
+    }
 </div>
