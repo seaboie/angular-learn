@@ -10,13 +10,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
 
-  loginCount: number = 0;
-  
-  countLoginAttempts() {
-    this.loginCount!++;
-  }
-
-  resetLoginAttempts() {
-    this.loginCount = 0;
-  }
+  userRole: string = "Member";
 }
