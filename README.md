@@ -2,7 +2,7 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 11) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=1YXHx24Ohqs&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=20)  
+[Angular 18 Full Course (part 12) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=20)  
 
 ## 🛠️ 🛠️ 🛠️ @for , *ngFor : Array object 
 
