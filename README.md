@@ -96,19 +96,15 @@ interface User {
 ```html
 <div class=" p-20">
 
-    <h1 class="font-semibold text-2xl">*ngFor : loading array object</h1>
-
-    <ul>
-        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} : {{user.name}} <button class="btn-primary">Delete</button></li>
-    </ul>
-    <hr>
-
     <h1 class="font-semibold text-2xl">&#64;for : loading array object : Get $index</h1>
     <h2>Count all array is : {{count}}</h2>
 
+    <h1>-------</h1>
+
     <ul>
-        @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count) {
-            <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
+        @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count, first = $first, last = $last, even = $even, odd = $odd) {
+        <li>Odd is {{ odd }} : Even is {{ even }} : Last is {{ last }} : First is {{ first }} : Count is {{ c }} : Index is {{ i }} : Name is {{ user.name }}
+            <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
         }
     </ul>
 
@@ -122,7 +118,7 @@ interface User {
 ## Get index from `@for`  
 
 ```html
-@for (item of items; track item.id; let idx = $index, e = $even) {
+@for (item of items; track item.id; let idx = $index, c = $count, e = $even, odd = $odd, first = $first, last = $last) {
   <p>Item #{{ idx }}: {{ item.name }}</p>
 }
 ```  
