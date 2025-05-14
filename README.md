@@ -2,9 +2,10 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 9) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=m2z04vfaseg&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)
+[Angular 18 Full Course (part 9) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=m2z04vfaseg&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)  
+[Angular 18 Full Course (part 10) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=eBYok6IdIxw&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)  
 
-## 🛠️ 🛠️ 🛠️ ngFor , @for : Array
+## 🛠️ 🛠️ 🛠️ ngFor , @for : Array Object
 
 > ts
 
@@ -16,7 +17,35 @@
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  users: Array<string> = ["John", "Sam", "Smith", "Jenifier"];
+  // users: Array<string> = ["John", "Sam", "Smith", "Jenifer"];
+  usersObj: Array<User> = [
+    {
+      id: 1,
+      name: "John",
+      email: "john@gmail.com"
+    },
+    {
+      id: 2,
+      name: "Smith",
+      email: "smith@gmail.com"
+    },
+    {
+      id: 3,
+      name: "Sam",
+      email: "sam@gmail.com"
+    },
+    {
+      id: 4,
+      name: "Jenifer",
+      email: "jenifer@gmail.com"
+    }
+  ];
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 ```
 
@@ -24,26 +53,18 @@ export class AppComponent {
 
 ```html
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">*ngFor="" </h1>
+    <h1 class="font-semibold text-2xl">*ngFor="" : loading array object</h1>
 
-    <h2 *ngFor="let user of users">{{user}}</h2>
-
-    <hr>
     <ul>
-        <li *ngFor="let user of users">{{user}}</li>
+        <li *ngFor="let user of usersObj">{{user.email}}</li>
     </ul>
     <hr>
 
-    <h1 class="font-semibold text-2xl">&#64;for </h1>
+    <h1 class="font-semibold text-2xl">&#64;for : loading array object</h1>
 
-    @for (user of users; track user) {
-        <h3>{{user}} - loading use &#64;for</h3>
-    }
-
-    <hr>
     <ul>
-        @for (user of users; track user) {
-            <li>{{user}}</li>
+        @for (user of usersObj; track user.id) {
+            <li>{{user.email}}</li>
         }
     </ul>
 
