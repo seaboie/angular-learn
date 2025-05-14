@@ -2,8 +2,14 @@
 
     <h1 class="font-semibold text-2xl">*ngFor : loading array object</h1>
 
+    <div *ngIf="usersObj.length == 0">
+        <p>- *ngIf : No users to display</p>
+    </div>
+
     <ul>
-        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} : {{user.name}} <button class="btn-primary">Delete</button></li>
+        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} :
+            {{user.name}} <button class="btn-primary" (click)="onDelete(user)">Delete</button>
+        </li>
     </ul>
     <hr>
 
@@ -12,7 +18,10 @@
 
     <ul>
         @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count) {
-            <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
+        <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button>
+        </li>
+        } @empty {
+        <li>- &#64;There are no users</li>
         }
     </ul>
 

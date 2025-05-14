@@ -13,28 +13,7 @@ export class AppComponent {
   index: number = 0;
   count: number = 0;
   
-  usersObj: Array<User> = [
-    {
-      id: 1,
-      name: "John",
-      email: "john@gmail.com"
-    },
-    {
-      id: 2,
-      name: "Smith",
-      email: "smith@gmail.com"
-    },
-    {
-      id: 3,
-      name: "Sam",
-      email: "sam@gmail.com"
-    },
-    {
-      id: 4,
-      name: "Jenifer",
-      email: "jenifer@gmail.com"
-    }
-  ];
+  usersObj: Array<User> = [];
 
   constructor() {
     this.count = this.usersObj.length;

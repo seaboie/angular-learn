@@ -4,28 +4,23 @@
 
 [Angular 18 Full Course (part 11) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=1YXHx24Ohqs&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=20)  
 
-## 🛠️ 🛠️ 🛠️ @for , *ngFor : Array object 
+## 🛠️ 🛠️ 🛠️ @empty : @for & @empty
 
-### [Contextual variables in @for blocks](https://angular.dev/guide/templates/control-flow#contextual-variables-in-for-blocks)  
+### [Providing a fallback for `@for` blocks with the `@empty` block](https://angular.dev/guide/templates/control-flow#providing-a-fallback-for-for-blocks-with-the-empty-block)  
 
-Inside `@for` blocks, several implicit variables are always available:
+### [Angular 18 Full Course (Part 12) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=20)  
 
-| Variable | Meaning |
-|---|---|
-| `$count` | Number of items in a collection iterated over | 
-| `$index` | Index of the current row | 
-| `$first` | Whether the current row is the first row | 
-| `$last` | Whether the current row is the last row| 
-| `$even` | Whether the current row index is even | 
-| `$odd` | Whether the current row index is odd | 
 
+```html
+@for (item of items; track item.name) {
+  <li> {{ item.name }}</li>
+} @empty {
+  <li aria-hidden="true"> There are no items. </li>
+}
+```  
 > ts
 
 ```ts
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-root',
   imports: [CommonModule, FormsModule],
@@ -37,28 +32,7 @@ export class AppComponent {
   index: number = 0;
   count: number = 0;
   
-  usersObj: Array<User> = [
-    {
-      id: 1,
-      name: "John",
-      email: "john@gmail.com"
-    },
-    {
-      id: 2,
-      name: "Smith",
-      email: "smith@gmail.com"
-    },
-    {
-      id: 3,
-      name: "Sam",
-      email: "sam@gmail.com"
-    },
-    {
-      id: 4,
-      name: "Jenifer",
-      email: "jenifer@gmail.com"
-    }
-  ];
+  usersObj: Array<User> = [];
 
   constructor() {
     this.count = this.usersObj.length;
@@ -88,18 +62,21 @@ interface User {
   name: string;
   email: string;
 }
-
-```
-
+```  
 > html
-
 ```html
 <div class=" p-20">
 
     <h1 class="font-semibold text-2xl">*ngFor : loading array object</h1>
 
+    <div *ngIf="usersObj.length == 0">
+        <p>- *ngIf : No users to display</p>
+    </div>
+
     <ul>
-        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} : {{user.name}} <button class="btn-primary">Delete</button></li>
+        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} :
+            {{user.name}} <button class="btn-primary" (click)="onDelete(user)">Delete</button>
+        </li>
     </ul>
     <hr>
 
@@ -108,7 +85,10 @@ interface User {
 
     <ul>
         @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count) {
-            <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
+        <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button>
+        </li>
+        } @empty {
+        <li>- &#64;There are no users</li>
         }
     </ul>
 
@@ -117,12 +97,4 @@ interface User {
     <button class="btn-primary" (click)="addNewUser()">Add New User</button>
 
 </div>
-```  
-
-## Get index from `@for`  
-
-```html
-@for (item of items; track item.id; let idx = $index, e = $even) {
-  <p>Item #{{ idx }}: {{ item.name }}</p>
-}
 ```  
