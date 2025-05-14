@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
 
   index: number = 0;
+  count: number = 0;
+  
   usersObj: Array<User> = [
     {
       id: 1,
@@ -34,18 +36,26 @@ export class AppComponent {
     }
   ];
 
+  constructor() {
+    this.count = this.usersObj.length;
+  }
+
   addNewUser() {
     let user: User = {id: 5, name: 'User 1', email: 'user1@gmail.com'};
     this.usersObj.push(user);
+    this.count = this.usersObj.length;
   }
 
   onDelete(user: User) {
     this.index = this.usersObj.indexOf(user);
     this.usersObj.splice(this.index, 1);
+    this.count = this.usersObj.length;
   }
 
   deleteFromIndex(index: number) {
     this.usersObj.splice(index, 1);
+    this.count = this.usersObj.length;
+    
   }
 }
 

@@ -1,28 +1,22 @@
 <div class=" p-20">
-    <h1 class="font-semibold text-2xl">*ngFor="" : loading array object</h1>
-    <h2>Index is {{index}}</h2>
 
-    <hr>
-    <h3>- Ng For</h3>
-    <ul>
-        <li *ngFor="let user of usersObj">{{user.name}} <button class="btn-primary" (click)="onDelete(user)">Delete</button></li>
-    </ul>
+    <h1 class="font-semibold text-2xl">*ngFor : loading array object</h1>
 
-    <hr>
-    <!-- - Get index from *ngFor loop -->
-    <h3>- Get index from *ngFor loop</h3>
     <ul>
-        <li *ngFor="let user of usersObj; let i = index;">{{i}} {{user.name}} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete index</button></li>
+        <li *ngFor="let user of usersObj; let i = index; let c = count">Count is : {{c}} , Index is {{i}} : {{user.name}} <button class="btn-primary">Delete</button></li>
     </ul>
     <hr>
 
-    <h1 class="font-semibold text-2xl">&#64;for : loading array object</h1>
+    <h1 class="font-semibold text-2xl">&#64;for : loading array object : Get $index</h1>
+    <h2>Count all array is : {{count}}</h2>
 
     <ul>
-        @for (user of usersObj; track user.id) {
-            <li>{{user.name}}</li>
+        @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count) {
+            <li>{{ c }} {{ i }} {{ user.name }} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
         }
     </ul>
+
+    <hr>
 
     <button class="btn-primary" (click)="addNewUser()">Add New User</button>
 
