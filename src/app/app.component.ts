@@ -9,7 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // users: Array<string> = ["John", "Sam", "Smith", "Jenifer"];
+
+  index: number = 0;
   usersObj: Array<User> = [
     {
       id: 1,
@@ -32,6 +33,20 @@ export class AppComponent {
       email: "jenifer@gmail.com"
     }
   ];
+
+  addNewUser() {
+    let user: User = {id: 5, name: 'User 1', email: 'user1@gmail.com'};
+    this.usersObj.push(user);
+  }
+
+  onDelete(user: User) {
+    this.index = this.usersObj.indexOf(user);
+    this.usersObj.splice(this.index, 1);
+  }
+
+  deleteFromIndex(index: number) {
+    this.usersObj.splice(index, 1);
+  }
 }
 
 interface User {

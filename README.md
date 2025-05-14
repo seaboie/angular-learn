@@ -3,9 +3,9 @@
 ## On Youtube
 
 [Angular 18 Full Course (part 9) - Complete Zero to Hero Angular full Tutorial](https://www.youtube.com/watch?v=m2z04vfaseg&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)  
-[Angular 18 Full Course (part 10) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=eBYok6IdIxw&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)  
+[Angular 18 Full Course (part 10) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=eBYok6IdIxw&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=22)
 
-## 🛠️ 🛠️ 🛠️ ngFor , @for : Array Object
+## 🛠️ 🛠️ 🛠️ Insert and Delete  
 
 > ts
 
@@ -17,7 +17,8 @@
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // users: Array<string> = ["John", "Sam", "Smith", "Jenifer"];
+
+  index: number = 0;
   usersObj: Array<User> = [
     {
       id: 1,
@@ -40,6 +41,20 @@ export class AppComponent {
       email: "jenifer@gmail.com"
     }
   ];
+
+  addNewUser() {
+    let user: User = {id: 5, name: 'User 1', email: 'user1@gmail.com'};
+    this.usersObj.push(user);
+  }
+
+  onDelete(user: User) {
+    this.index = this.usersObj.indexOf(user);
+    this.usersObj.splice(this.index, 1);
+  }
+
+  deleteFromIndex(index: number) {
+    this.usersObj.splice(index, 1);
+  }
 }
 
 interface User {
@@ -54,9 +69,19 @@ interface User {
 ```html
 <div class=" p-20">
     <h1 class="font-semibold text-2xl">*ngFor="" : loading array object</h1>
+    <h2>Index is {{index}}</h2>
 
+    <hr>
+    <h3>- Ng For</h3>
     <ul>
-        <li *ngFor="let user of usersObj">{{user.email}}</li>
+        <li *ngFor="let user of usersObj">{{user.name}} <button class="btn-primary" (click)="onDelete(user)">Delete</button></li>
+    </ul>
+
+    <hr>
+    <!-- - Get index from *ngFor loop -->
+    <h3>- Get index from *ngFor loop</h3>
+    <ul>
+        <li *ngFor="let user of usersObj; let i = index;">{{i}} {{user.name}} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete index</button></li>
     </ul>
     <hr>
 
@@ -64,10 +89,20 @@ interface User {
 
     <ul>
         @for (user of usersObj; track user.id) {
-            <li>{{user.email}}</li>
+            <li>{{user.name}}</li>
         }
     </ul>
 
-</div>
-```  
+    <button class="btn-primary" (click)="addNewUser()">Add New User</button>
 
+</div>
+```
+
+## Get index from \*ngFor loop
+`<li *ngFor="let user of usersObj; let i = index;">...</li>`  
+
+```html
+<ul>
+  <li *ngFor="let user of usersObj; let i = index;">{{i}} {{user.name}} <button class="btn-primary" (click)="deleteFromIndex(i)">Delete index</button></li>
+</ul>
+```
