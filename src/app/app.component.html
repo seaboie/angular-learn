@@ -1,19 +1,35 @@
 <div class=" p-20">
 
-    <h1 class="font-semibold text-2xl">&#64;for : loading array object : Get $index</h1>
-    <h2>Count all array is : {{count}}</h2>
+    <h1 class="font-semibold text-2xl">Ng-Switch</h1>
 
-    <h1>-------</h1>
-
-    <ul>
-        @for (user of usersObj; track user.id; let i = $index, e = $even, c = $count, first = $first, last = $last, even = $even, odd = $odd) {
-        <li>Odd is {{ odd }} : Even is {{ even }} : Last is {{ last }} : First is {{ first }} : Count is {{ c }} : Index is {{ i }} : Name is {{ user.name }}
-            <button class="btn-primary" (click)="deleteFromIndex(i)">Delete</button></li>
-        }
-    </ul>
+    <div [ngSwitch]="usersRole">
+        <p *ngSwitchCase="'Admin'">Welcome Admin</p>
+        <p *ngSwitchCase="'Member'">Welcome Member</p>
+        <p *ngSwitchCase="'Guest'">Welcome Guest</p>
+        <p *ngSwitchCase="'Editor'">Wecome Editor</p>
+        <p *ngSwitchDefault="">Please Login</p>
+    </div>
 
     <hr>
 
-    <button class="btn-primary" (click)="addNewUser()">Add New User</button>
+    <h1 class="font-semibold text-2xl">&#64;switch</h1>
+
+    @switch (usersRole) {
+    @case ('Admin') {
+    <p>Welcome Admin</p>
+    }
+    @case ('Member') {
+    <p>Welcome Member</p>
+    }
+    @case ('Guest') {
+    <p>Welcome Guest</p>
+    }
+    @case ('Editor') {
+    <p>Welcome Editor</p>
+    }
+    @default {
+    <p>Please Login</p>
+    }
+    }
 
 </div>
