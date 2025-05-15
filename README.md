@@ -13,23 +13,21 @@
 > ts
 
 ```ts
-import {
-  CommonModule,
-  NgSwitch,
-  NgSwitchCase,
-  NgSwitchDefault,
-} from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, NgSwitch, NgSwitchCase, NgSwitchDefault],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  usersRole: string = 'Guest';
+  isLoggedIn: boolean = true;
+
+  // style variable
+  navStyle = 'font-size: 2.2rem; color: cornflowerblue; font-weight: bold';
+  navStyles = 'font-size: 4.2rem; color: cornflowerblue; font-weight: bold';
+
+  // style object variable
+  objectVariable = {'font-size': this.isLoggedIn ? '32px' : '18px', 'color': this.isLoggedIn ? 'blue' : 'green'}
 }
 ```
 
@@ -38,37 +36,38 @@ export class AppComponent {
 ```html
 <div class=" p-20">
 
-    <h1 class="font-semibold text-2xl">Ng-Switch</h1>
+    <h1 
+        [style.color]="isLoggedIn ? 'green' : 'red'" 
+        [style.textTransform]="isLoggedIn ? 'uppercase' : 'lowercase'"
+        [style.fontSize]="isLoggedIn ? '34px' : '56px'"
+        >
+        Single Style
+    </h1>
 
-    <div [ngSwitch]="usersRole">
-        <p *ngSwitchCase="'Admin'">Welcome Admin</p>
-        <p *ngSwitchCase="'Member'">Welcome Member</p>
-        <p *ngSwitchCase="'Guest'">Welcome Guest</p>
-        <p *ngSwitchCase="'Editor'">Wecome Editor</p>
-        <p *ngSwitchDefault="">Please Login</p>
-    </div>
+        <!-- multiple style with variable -->
+    <h1 
+        [style]="isLoggedIn ? navStyles : navStyle"
+    >
+    Multiple Style with variable
+    </h1>
 
     <hr>
 
-    <h1 class="font-semibold text-2xl">&#64;switch</h1>
+    <h1 [ngStyle]="{
+        'color': isLoggedIn ? 'green' : 'red',
+        'textTransform': isLoggedIn ? 'uppercase' : 'lowercase',
+        'fontSize': isLoggedIn ? '50px' : '18px'
+        }"
+    >
+    Ng Style Directive
+    </h1>
 
-    @switch (usersRole) {
-    @case ('Admin') {
-    <p>Welcome Admin</p>
-    }
-    @case ('Member') {
-    <p>Welcome Member</p>
-    }
-    @case ('Guest') {
-    <p>Welcome Guest</p>
-    }
-    @case ('Editor') {
-    <p>Welcome Editor</p>
-    }
-    @default {
-    <p>Please Login</p>
-    }
-    }
+    <hr>
+
+    <h1 [ngStyle]="objectVariable"
+    >
+    Ng Style Directive variable
+    </h1>
 
 </div>
 ```  
