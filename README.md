@@ -5,9 +5,9 @@
 [Angular 18 Full Course (part 12) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=21)  
 
 
-## 🛠️ 🛠️ 🛠️ @switch  
+## 🛠️ 🛠️ 🛠️   Style binding
 
-[Document](https://angular.dev/guide/templates/control-flow#conditionally-display-content-with-the-switch-block)  
+[Class and style binding](https://v17.angular.io/guide/class-binding)  
 
 
 > ts
