@@ -2,7 +2,7 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 14) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=mF5md9e64O8&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=16)  
+[Angular 18 Full Course (part 15) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=J6Lqzwakw2o&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=15)  
 
 
 ## 🛠️ 🛠️ 🛠️   @Input()
