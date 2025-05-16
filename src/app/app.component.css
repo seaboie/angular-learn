@@ -1,28 +1,23 @@
-.fontsize {
-    font-size: 100px;
+.login {
+    font-size: 48px;
+    color: green;
+    text-transform: uppercase;
 }
 
-.space {
-    padding: 10px;
+.logout {
+    font-size: 48px;
+    color: red;
+    text-transform: lowercase;
 }
 
-.active {
+.one {
+    text-decoration: line-through;
+}
+
+.two {
     background-color: red;
-    border: 3px solid blue;
 }
 
-.no-active {
-    background-color: red;
-}
-.active-border {
-    border: 5px solid red;
-}
-
-.no-active-border {
-    border: 5px solid yellow;
-}
-
-.apple {
-    background-color: blue;
-    border: 5px solid yellow;
+.three {
+    font-size: 48px;
 }

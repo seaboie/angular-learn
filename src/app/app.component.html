@@ -1,36 +1,22 @@
 <div class=" p-20">
 
-    <h1 
-        [style.color]="isLoggedIn ? 'green' : 'red'" 
-        [style.textTransform]="isLoggedIn ? 'uppercase' : 'lowercase'"
-        [style.fontSize]="isLoggedIn ? '34px' : '56px'"
-        >
-        Single Style
-    </h1>
+    <!-- Direct to class css -->
+    <h1 [class.login]="isLoggedIn">Class Binding</h1>
+    
+    <!-- Condition to get class css -->
+    <h1 [class]="isLoggedIn ? 'logout' : 'login'">Class Binding</h1>
 
-        <!-- multiple style with variable -->
-    <h1 
-        [style]="isLoggedIn ? navStyles : navStyle"
-    >
-    Multiple Style with variable
-    </h1>
+    <!-- Array<string> multiple class css-->
+    <h1 [class]="classExpression">Array String</h1>
 
     <hr>
 
-    <h1 [ngStyle]="{
-        'color': isLoggedIn ? 'green' : 'red',
-        'textTransform': isLoggedIn ? 'uppercase' : 'lowercase',
-        'fontSize': isLoggedIn ? '50px' : '18px'
-        }"
-    >
-    Ng Style Directive
-    </h1>
-
-    <hr>
-
-    <h1 [ngStyle]="objectVariable"
-    >
-        Ng Style Directive variable
+    <!-- ngClass condition ( use Object ) -->
+    <h1 [ngClass]="{
+        'login': isLoggedIn, 
+        'logout': !isLoggedIn
+        }">
+    Ng Class Directive
     </h1>
 
 </div>

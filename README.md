@@ -2,13 +2,40 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 12) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=21)  
+[Angular 18 Full Course (part 13) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=21)  
 
 
-## 🛠️ 🛠️ 🛠️   Style binding
+## 🛠️ 🛠️ 🛠️   Class binding & ngClass
 
 [Class and style binding](https://v17.angular.io/guide/class-binding)  
 
+> css
+
+```css
+.login {
+    font-size: 48px;
+    color: green;
+    text-transform: uppercase;
+}
+
+.logout {
+    font-size: 48px;
+    color: red;
+    text-transform: lowercase;
+}
+
+.one {
+    text-decoration: line-through;
+}
+
+.two {
+    background-color: red;
+}
+
+.three {
+    font-size: 48px;
+}
+```  
 
 > ts
 
@@ -22,12 +49,7 @@
 export class AppComponent {
   isLoggedIn: boolean = true;
 
-  // style variable
-  navStyle = 'font-size: 2.2rem; color: cornflowerblue; font-weight: bold';
-  navStyles = 'font-size: 4.2rem; color: cornflowerblue; font-weight: bold';
-
-  // style object variable
-  objectVariable = {'font-size': this.isLoggedIn ? '32px' : '18px', 'color': this.isLoggedIn ? 'blue' : 'green'}
+  classExpression = ['one', 'two', 'three'];
 }
 ```
 
@@ -36,38 +58,26 @@ export class AppComponent {
 ```html
 <div class=" p-20">
 
-    <h1 
-        [style.color]="isLoggedIn ? 'green' : 'red'" 
-        [style.textTransform]="isLoggedIn ? 'uppercase' : 'lowercase'"
-        [style.fontSize]="isLoggedIn ? '34px' : '56px'"
-        >
-        Single Style
-    </h1>
+    <!-- Direct to class css -->
+    <h1 [class.login]="isLoggedIn">Class Binding</h1>
+    
+    <!-- Condition to get class css -->
+    <h1 [class]="isLoggedIn ? 'logout' : 'login'">Class Binding</h1>
 
-        <!-- multiple style with variable -->
-    <h1 
-        [style]="isLoggedIn ? navStyles : navStyle"
-    >
-    Multiple Style with variable
-    </h1>
+    <!-- Array<string> multiple class css-->
+    <h1 [class]="classExpression">Array String</h1>
 
     <hr>
 
-    <h1 [ngStyle]="{
-        'color': isLoggedIn ? 'green' : 'red',
-        'textTransform': isLoggedIn ? 'uppercase' : 'lowercase',
-        'fontSize': isLoggedIn ? '50px' : '18px'
-        }"
-    >
-    Ng Style Directive
-    </h1>
-
-    <hr>
-
-    <h1 [ngStyle]="objectVariable"
-    >
-    Ng Style Directive variable
+    <!-- ngClass condition ( use Object ) -->
+    <h1 [ngClass]="{
+        'login': isLoggedIn, 
+        'logout': !isLoggedIn
+        }">
+    Ng Class Directive
     </h1>
 
 </div>
 ```  
+
+
