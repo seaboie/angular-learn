@@ -1,0 +1,7 @@
+<ul class="text-lg flex gap-4">
+
+    @for (menu of menus; track menu.id) {
+    <li class="grid place-items-center hover:text-gray-500"><a routerLink="{{menu.routerLink}}">{{menu.title}} </a></li>
+    }
+
+</ul>

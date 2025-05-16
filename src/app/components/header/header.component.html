@@ -1,19 +1,12 @@
 <header class="grid grid-cols-[5%_1fr_5%]  bg-gray-100">
     <div></div>
     <div class="grid grid-cols-[30%_1fr_15%] py-3">
-        <h1 class="text-2xl text-slate-600 hover:text-slate-500 font-extrabold"><a routerLink="{{brandLogoLink}}">{{ brandLogo }}</a></h1>
-        <div class="grid justify-items-end">
-            <ul class="text-lg  flex gap-4">
-
-                @for (menu of menus; track menu.id) {
-                <li class="grid place-items-center hover:text-gray-500"><a
-                        routerLink="{{menu.routerLink}}">{{menu.title}} </a></li>
-                }
-
-            </ul>
+        <app-header-brand></app-header-brand>
+        <div class="grid justify-items-end items-center">
+            <app-menu-top></app-menu-top>
         </div>
         <div class="grid justify-items-end">
-            <img src="{{baseUrlImageRight}}" alt="logo" class="w-10 h-10 rounded-full">
+            <app-icon-profile></app-icon-profile>
         </div>
     </div>
     <div></div>

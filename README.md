@@ -2,82 +2,63 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 13) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=Dbu__pRA1lk&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=21)  
+[Angular 18 Full Course (part 14) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=mF5md9e64O8&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=16)  
 
 
-## 🛠️ 🛠️ 🛠️   Class binding & ngClass
+## 🛠️ 🛠️ 🛠️   @Input()
 
-[Class and style binding](https://v17.angular.io/guide/class-binding)  
+### Get data from parent
 
-> css
-
-```css
-.login {
-    font-size: 48px;
-    color: green;
-    text-transform: uppercase;
-}
-
-.logout {
-    font-size: 48px;
-    color: red;
-    text-transform: lowercase;
-}
-
-.one {
-    text-decoration: line-through;
-}
-
-.two {
-    background-color: red;
-}
-
-.three {
-    font-size: 48px;
-}
-```  
-
-> ts
+> app.component.ts
 
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, PostsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  isLoggedIn: boolean = true;
-
-  classExpression = ['one', 'two', 'three'];
+  appPostTitle: string = 'Post 1';
+  appIsLogin: boolean = false;
 }
-```
+```  
 
-> html
+> app.component.html
 
 ```html
-<div class=" p-20">
+<h1>{{ appPostTitle }}</h1>
+<app-posts-list [postListTitle]="appPostTitle" [postIsLogin]="appIsLogin" />
+```
 
-    <!-- Direct to class css -->
-    <h1 [class.login]="isLoggedIn">Class Binding</h1>
-    
-    <!-- Condition to get class css -->
-    <h1 [class]="isLoggedIn ? 'logout' : 'login'">Class Binding</h1>
+> posts-list.component.ts
 
-    <!-- Array<string> multiple class css-->
-    <h1 [class]="classExpression">Array String</h1>
-
-    <hr>
-
-    <!-- ngClass condition ( use Object ) -->
-    <h1 [ngClass]="{
-        'login': isLoggedIn, 
-        'logout': !isLoggedIn
-        }">
-    Ng Class Directive
-    </h1>
-
-</div>
+```ts
+@Component({
+  selector: 'app-posts-list',
+  imports: [],
+  templateUrl: './posts-list.component.html',
+  styleUrl: './posts-list.component.css'
+})
+export class PostsListComponent {
+  @Input() postListTitle: string = '';
+  @Input() postIsLogin: boolean = false;
+}
 ```  
+
+> posts-list.component.html  
+
+```html
+<p>posts-list works!</p>
+<p>Get value from AppComponent : parent : {{ postListTitle }}</p>
+
+@if (postIsLogin) {
+    <p>Get True</p>
+} @else {
+    <p>Get False</p>
+}
+
+```  
+
 
 

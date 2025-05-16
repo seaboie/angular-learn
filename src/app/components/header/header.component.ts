@@ -1,22 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { IconProfileComponent } from "../../widgets/header/icon-profile/icon-profile.component";
+import { MenuTopComponent } from "../../widgets/header/menu-top/menu-top.component";
+import { HeaderBrandComponent } from "../../widgets/header/header-brand/header-brand.component";
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [IconProfileComponent, MenuTopComponent, HeaderBrandComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
-  brandLogo: string = 'Angular Router App';
-  brandLogoLink: string = '';
-  baseUrlImageRight: string =
-    'https://raw.githubusercontent.com/seaboie/images/main/images/logo/logo.jpg';
-
-  menus = [
-    { id: 1, title: 'หน้าแรก', routerLink: '' },
-    { id: 2, title: 'หน้าสอง', routerLink: '/second-component' },
-    { id: 3, title: 'หน้าสาม', routerLink: '/third-component' },
-    { id: 4, title: 'หน้าสี่', routerLink: '/forth-component' },
-  ];
-}
+export class HeaderComponent {}
