@@ -14,23 +14,8 @@ import { PostsListComponent } from './widgets/posts-list/posts-list.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  @ViewChild(PostsListComponent) childMessage: any;
-  message: string = '';
   messageFromChild: string = '';
-  messageChild: any;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-  ngAfterViewInit(): void {
-
-    this.message = this.childMessage.childMessage;
-    this.messageChild = this.childMessage.postCount;
-    console.log(this.childMessage);
-    // Use ::: ChangeDetectorRef , to solved : ERROR RuntimeError: NG0100: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked.
-    // Solved in ::: constructor(private changeDetectorRef: ChangeDetectorRef) {}
-    this.changeDetectorRef.detectChanges();
-
-  }
 
   reciveMessage(message: string) {
     this.messageFromChild = message;
