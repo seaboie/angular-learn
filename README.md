@@ -5,45 +5,47 @@
 [Angular 18 Full Course (part 16) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=5FR6rvjW-AU&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=15)  
 
 
-## 🛠️ 🛠️ 🛠️   ng-content
-
+## 🛠️ 🛠️ 🛠️   ng-content multiple
 ### Send html block of code to child  
 
-### `<ng-content></ng-content>`  
+### `<ng-content select="[header]"></ng-content>`  
+
+- Use `select="[header]"` to identify  
+- Use `select="[body]"` to identify  
+- Use `select="[footer]"` to identify  
 
 > card.component.html  
 
 ```html
 <div class="m-4 p-8 bg-gray-200">
-    <p>card works!</p>
-    <ng-content></ng-content>
+    <header><ng-content select="[header]"></ng-content> </header>
+    <div class="m-2 p-2 bg-gray-400">
+        <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="m-2 p-2 bg-gray-300">
+        <footer>
+            <ng-content select="[footer]"></ng-content>
+        </footer>
+    </div>
 </div>
 ```  
 
 ## Use `card.component.html  
 
+- Use `header` key variable to Element tag   
+- Use `body` key variable to Element tag  
+- Use `footer` key variable to Element tag  
+
 > app.component.html
 
 ```html
-<<app-posts-list />
+<app-posts-list />
 <app-card>
-    <h2>John Doe</h2>
-    <p>01/08/25</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, at accusamus. Temporibus obcaecati esse rem. Commodi vitae inventore sed corrupti, quasi iure, illo, adipisci consequuntur quas maxime quod modi dolore.</p>
+    <span header> username </span>
+    <h1 body>John Doe</h1>
+    <button class="btn-primary" footer>View Profile</button>
 </app-card>
 ```
-
-> posts-list.component.html  
-
-```html
-<p>posts-list works!</p>
-
-<app-card>
-    <h2>Blog Post Title 1</h2>
-    <p>04/08/24</p>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora amet sapiente atque consequatur rerum dolore facilis modi aut ab molestias numquam totam veritatis at eius assumenda molestiae, reprehenderit, sequi quidem.</p>
-</app-card>å
-```  
 
 
 

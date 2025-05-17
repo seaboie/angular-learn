@@ -3,7 +3,7 @@ import { CardComponent } from "../card/card.component";
 
 @Component({
   selector: 'app-posts-list',
-  imports: [CardComponent],
+  imports: [],
   templateUrl: './posts-list.component.html',
   styleUrl: './posts-list.component.css'
 })
