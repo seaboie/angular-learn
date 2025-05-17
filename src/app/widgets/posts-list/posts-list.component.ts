@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CardComponent } from "../card/card.component";
 
 @Component({
   selector: 'app-posts-list',
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './posts-list.component.html',
   styleUrl: './posts-list.component.css'
 })

@@ -2,62 +2,47 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (part 15) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=J6Lqzwakw2o&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=15)  
+[Angular 18 Full Course (part 16) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=5FR6rvjW-AU&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=15)  
 
 
-## 🛠️ 🛠️ 🛠️   @Input()
+## 🛠️ 🛠️ 🛠️   ng-content
 
-### Get data from parent
+### Send html block of code to child  
 
-> app.component.ts
+### `<ng-content></ng-content>`  
 
-```ts
-@Component({
-  selector: 'app-root',
-  imports: [CommonModule, FormsModule, PostsListComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-})
-export class AppComponent {
-  appPostTitle: string = 'Post 1';
-  appIsLogin: boolean = false;
-}
+> card.component.html  
+
+```html
+<div class="m-4 p-8 bg-gray-200">
+    <p>card works!</p>
+    <ng-content></ng-content>
+</div>
 ```  
+
+## Use `card.component.html  
 
 > app.component.html
 
 ```html
-<h1>{{ appPostTitle }}</h1>
-<app-posts-list [postListTitle]="appPostTitle" [postIsLogin]="appIsLogin" />
+<<app-posts-list />
+<app-card>
+    <h2>John Doe</h2>
+    <p>01/08/25</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, at accusamus. Temporibus obcaecati esse rem. Commodi vitae inventore sed corrupti, quasi iure, illo, adipisci consequuntur quas maxime quod modi dolore.</p>
+</app-card>
 ```
-
-> posts-list.component.ts
-
-```ts
-@Component({
-  selector: 'app-posts-list',
-  imports: [],
-  templateUrl: './posts-list.component.html',
-  styleUrl: './posts-list.component.css'
-})
-export class PostsListComponent {
-  @Input() postListTitle: string = '';
-  @Input() postIsLogin: boolean = false;
-}
-```  
 
 > posts-list.component.html  
 
 ```html
 <p>posts-list works!</p>
-<p>Get value from AppComponent : parent : {{ postListTitle }}</p>
 
-@if (postIsLogin) {
-    <p>Get True</p>
-} @else {
-    <p>Get False</p>
-}
-
+<app-card>
+    <h2>Blog Post Title 1</h2>
+    <p>04/08/24</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora amet sapiente atque consequatur rerum dolore facilis modi aut ab molestias numquam totam veritatis at eius assumenda molestiae, reprehenderit, sequi quidem.</p>
+</app-card>å
 ```  
 
 
