@@ -9,14 +9,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class PostsListComponent {
   // @ViewChild
   childMessage: string = 'Hello From Child Component';
-  postCount: number = 0;
-
-  parentMessage: string = 'Message from the child using : Click Event';
-
-  // @Output()
-  @Output() messageEventOutput = new EventEmitter();
-
-  sendMessage() {
-    this.messageEventOutput.emit(this.parentMessage);
-  }
+  postCount: number = 1;
+  childToParentMessage: string = 'Message from the child to parent';
 }
