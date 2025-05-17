@@ -1,2 +1,5 @@
-<h1>{{ appPostTitle }}</h1>
-<app-posts-list [postListTitle]="appPostTitle" [postIsLogin]="appIsLogin" />
+<app-posts-list (messageEventOutput)="reciveMessage($event)" />
+
+<p>{{message}}</p>
+<p>{{messageChild}}</p>
+<p>{{messageFromChild}}</p>

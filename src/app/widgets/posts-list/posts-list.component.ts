@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-posts-list',
@@ -7,6 +7,16 @@ import { Component, Input } from '@angular/core';
   styleUrl: './posts-list.component.css'
 })
 export class PostsListComponent {
-  @Input() postListTitle: string = '';
-  @Input() postIsLogin: boolean = false;
+  // @ViewChild
+  childMessage: string = 'Hello From Child Component';
+  postCount: number = 0;
+
+  parentMessage: string = 'Message from the child using : Click Event';
+
+  // @Output()
+  @Output() messageEventOutput = new EventEmitter();
+
+  sendMessage() {
+    this.messageEventOutput.emit(this.parentMessage);
+  }
 }
