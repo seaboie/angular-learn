@@ -5,7 +5,7 @@
 [Angular 18 Full Course (part 15) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=J6Lqzwakw2o&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=15)  
 
 
-## 🛠️ 🛠️ 🛠️   @Input()
+## 🛠️ 🛠️ 🛠️   @Output()
 
 ### Get data from parent
 
@@ -19,16 +19,20 @@
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  appPostTitle: string = 'Post 1';
-  appIsLogin: boolean = false;
+  messageFromChild: string = '';
+
+  reciveMessage(message: string) {
+    this.messageFromChild = message;
+  }
 }
 ```  
 
 > app.component.html
 
 ```html
-<h1>{{ appPostTitle }}</h1>
-<app-posts-list [postListTitle]="appPostTitle" [postIsLogin]="appIsLogin" />
+<app-posts-list (messageEventOutput)="reciveMessage($event)" />
+
+<p>{{messageFromChild}}</p>
 ```
 
 > posts-list.component.ts
@@ -41,8 +45,15 @@ export class AppComponent {
   styleUrl: './posts-list.component.css'
 })
 export class PostsListComponent {
-  @Input() postListTitle: string = '';
-  @Input() postIsLogin: boolean = false;
+
+  parentMessage: string = 'Message from the child using : Click Event';
+
+  // @Output()
+  @Output() messageEventOutput = new EventEmitter();
+
+  sendMessage() {
+    this.messageEventOutput.emit(this.parentMessage);
+  }
 }
 ```  
 
@@ -50,14 +61,8 @@ export class PostsListComponent {
 
 ```html
 <p>posts-list works!</p>
-<p>Get value from AppComponent : parent : {{ postListTitle }}</p>
 
-@if (postIsLogin) {
-    <p>Get True</p>
-} @else {
-    <p>Get False</p>
-}
-
+<button class="btn-primary" (click)="sendMessage()">Send Message To Parent</button>
 ```  
 
 

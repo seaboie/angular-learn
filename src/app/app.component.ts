@@ -16,7 +16,6 @@ import { PostsListComponent } from './widgets/posts-list/posts-list.component';
 export class AppComponent {
   messageFromChild: string = '';
 
-
   reciveMessage(message: string) {
     this.messageFromChild = message;
   }
