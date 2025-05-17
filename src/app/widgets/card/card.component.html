@@ -1,4 +1,11 @@
 <div class="m-4 p-8 bg-gray-200">
-    <p>card works!</p>
-    <ng-content></ng-content>
+    <header><ng-content select="[header]"></ng-content> </header>
+    <div class="m-2 p-2 bg-gray-400">
+        <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="m-2 p-2 bg-gray-300">
+        <footer>
+            <ng-content select="[footer]"></ng-content>
+        </footer>
+    </div>
 </div>
