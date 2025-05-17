@@ -6,9 +6,8 @@
 
 
 ## 🛠️ 🛠️ 🛠️  Ng Component outlet
-### display component by `*ngComponentOutlet=""`   
+### display component by Injector : `constructor(private viewContainer: ViewContainerRef) {}`
 
-### `<ng-content select="[header]"></ng-content>`  
 
 
 > app.component.ts
@@ -16,13 +15,19 @@
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, PostsListComponent, NgComponentOutlet],
+  imports: [CommonModule, FormsModule, PostsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+
+  constructor(private viewContainer: ViewContainerRef) {}
   loadComponent() {
-    return PostsListComponent;
+    this.viewContainer.createComponent(PostsListComponent);
+  }
+
+  removeComponent() {
+    this.viewContainer.remove();
   }
 }
 ```  
@@ -31,7 +36,9 @@ export class AppComponent {
 
 ```html
 <app-posts-list />
-<div *ngComponentOutlet="loadComponent()"></div>
+
+<button class="btn-primary" (click)="loadComponent()">Load Post list component</button>
+<button class="btn-primary" (click)="removeComponent()">Remove Component</button>
 ```
 
 
