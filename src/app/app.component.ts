@@ -1,22 +1,17 @@
-import { CommonModule, NgComponentOutlet } from '@angular/common';
-import { Component, ViewContainerRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { PostsListComponent } from './widgets/posts-list/posts-list.component';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ProfileComponent } from "./widgets/profile/profile.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, PostsListComponent],
+  imports: [CommonModule, ProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
 
-  constructor(private viewContainer: ViewContainerRef) {}
-  loadComponent() {
-    this.viewContainer.createComponent(PostsListComponent);
-  }
-
-  removeComponent() {
-    this.viewContainer.remove();
+  userName: string = 'John Doe';
+  changeUsername() {
+    this.userName = 'John Smith';
   }
 }

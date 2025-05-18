@@ -5,29 +5,51 @@
 [Angular 18 Full Course (Part 17) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=coqU17HJfL8&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=13)  
 
 
-## 🛠️ 🛠️ 🛠️  Ng Component outlet
-### display component by Injector : `constructor(private viewContainer: ViewContainerRef) {}`
+## 🛠️ 🛠️ 🛠️  ngOnChange
+### Trigger when `@Input()` property change
 
 
+
+> profile.component.ts
+
+```ts
+@Component({
+  selector: 'app-profile',
+  imports: [],
+  templateUrl: './profile.component.html',
+  styleUrl: './profile.component.css'
+})
+export class ProfileComponent implements OnChanges {
+  @Input() inputUsername: string = '';
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('OnChanges Triggers'); 
+  }
+  
+}
+```  
+
+> profile.component.html
+
+```html
+<p>profile works!</p>
+<h1>{{inputUsername}}</h1>
+```  
 
 > app.component.ts
 
 ```ts
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, PostsListComponent],
+  imports: [CommonModule, ProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
 
-  constructor(private viewContainer: ViewContainerRef) {}
-  loadComponent() {
-    this.viewContainer.createComponent(PostsListComponent);
-  }
-
-  removeComponent() {
-    this.viewContainer.remove();
+  userName: string = 'John Doe';
+  changeUsername() {
+    this.userName = 'John Smith';
   }
 }
 ```  
@@ -35,11 +57,11 @@ export class AppComponent {
 > app.component.html
 
 ```html
-<app-posts-list />
+<app-profile [inputUsername]="userName"></app-profile>
 
-<button class="btn-primary" (click)="loadComponent()">Load Post list component</button>
-<button class="btn-primary" (click)="removeComponent()">Remove Component</button>
-```
+<button class="btn-primary" (click)="changeUsername()">Change Username</button>
+```  
+
 
 
 
