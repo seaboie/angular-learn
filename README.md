@@ -6,7 +6,7 @@
 
 
 ## 🛠️ 🛠️ 🛠️  ngAfterContentInit
-### Call during every content from child update parent
+### Call during every content from child update parent : first time
 
 
 
