@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { ProfileComponent } from "./widgets/profile/profile.component";
+import { Component, ViewContainerRef } from '@angular/core';
+import { ProfileComponent } from './widgets/profile/profile.component';
+import { PostsListComponent } from './widgets/posts-list/posts-list.component';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,14 @@ import { ProfileComponent } from "./widgets/profile/profile.component";
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  constructor(private viewContainer: ViewContainerRef) {}
 
   userName: string = 'John Doe';
   changeUsername() {
     this.userName = 'John Smith';
+  }
+
+  loadProfileComponent() {
+    this.viewContainer.createComponent(ProfileComponent);
   }
 }
