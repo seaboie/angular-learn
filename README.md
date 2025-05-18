@@ -2,11 +2,11 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (Part 18) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=QqNsMoDgy9A&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=12)  
+[Angular 18 Full Course (Part 19) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=7mtAFR1g_M0&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=12)  
 
 
-## 🛠️ 🛠️ 🛠️  ngDoCheck
-### Call during every change detection
+## 🛠️ 🛠️ 🛠️  ngAfterContentInit
+### Call during every content from child update parent
 
 
 
@@ -22,8 +22,8 @@
 })
 export class ProfileComponent implements OnInit {
 
-  ngDoCheck(): void {
-    console.log('ngDoCheck hook triggered');
+  ngAfterContentInit(): void {
+    console.log('Ng AfterContentInit triggered');
   }
   
 }

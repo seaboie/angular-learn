@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -6,33 +6,26 @@ import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@an
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent implements OnInit, DoCheck, OnChanges {
-  @Input() inputUsername: string = '';
-  counter: number = 0;
+export class ProfileComponent implements OnChanges, OnInit, DoCheck, AfterContentInit {
 
-  constructor() {
-    console.log('constructor triggered');
-    console.log(this.inputUsername);
-    
-  }
+  @Input() inputUsername: string = '';
+  
+  constructor() {}
 
   ngOnInit(): void {
-    console.log('ngOnInit hook triggered');
-    console.log(this.inputUsername);
     
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges hook triggered');
     
   }
+
   ngDoCheck(): void {
-    console.log('ngDoCheck hook triggered');
+    
   }
 
-  incrementCounter() {
-    this.counter++;
+  ngAfterContentInit(): void {
+    console.log('Ng AfterContentInit triggered');
+    
   }
-  
-  
 }
