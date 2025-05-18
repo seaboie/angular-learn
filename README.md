@@ -5,8 +5,8 @@
 [Angular 18 Full Course (Part 19) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=7mtAFR1g_M0&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=12)  
 
 
-## 🛠️ 🛠️ 🛠️  ngAfterViewChecked
-### Call during rendering evertime has change loading component
+## 🛠️ 🛠️ 🛠️  ngOnDestroy
+### Triggered before remove component from the Dom
 
 
 > profile.component.ts
@@ -20,8 +20,8 @@
 })
 export class ProfileComponent implements OnInit {
 
-  ngAfterViewChecked(): void {
-    console.log('Ng AfterViewChecked Triggered');
+  ngOnDestroy(): void {
+    console.log('Ng OnDestroy Triggered');
   }
   
 }

@@ -5,7 +5,7 @@ import { PostsListComponent } from './widgets/posts-list/posts-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, ProfileComponent],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -19,5 +19,9 @@ export class AppComponent {
 
   loadProfileComponent() {
     this.viewContainer.createComponent(ProfileComponent);
+  }
+
+  removeProfileComponent() {
+    this.viewContainer.remove();
   }
 }
