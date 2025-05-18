@@ -5,10 +5,8 @@
 [Angular 18 Full Course (Part 19) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=7mtAFR1g_M0&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=12)  
 
 
-## 🛠️ 🛠️ 🛠️  ngAfterContentInit
-### Call during every content from child update parent : first time
-
-
+## 🛠️ 🛠️ 🛠️  ngAfterContentCheck
+### Call during every content from child update parent
 
 
 > profile.component.ts
@@ -22,8 +20,8 @@
 })
 export class ProfileComponent implements OnInit {
 
-  ngAfterContentInit(): void {
-    console.log('Ng AfterContentInit triggered');
+  ngAfterContentChecked(): void {
+    console.log('Ng AfterContentCheck Trigger');
   }
   
 }

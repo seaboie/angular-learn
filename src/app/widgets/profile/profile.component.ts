@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-profile',
@@ -6,7 +6,7 @@ import { AfterContentInit, Component, DoCheck, Input, OnChanges, OnInit, SimpleC
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent implements OnChanges, OnInit, DoCheck, AfterContentInit {
+export class ProfileComponent implements OnChanges, OnInit, DoCheck, AfterContentInit, AfterContentChecked {
 
   @Input() inputUsername: string = '';
   
@@ -27,5 +27,9 @@ export class ProfileComponent implements OnChanges, OnInit, DoCheck, AfterConten
   ngAfterContentInit(): void {
     console.log('Ng AfterContentInit triggered');
     
+  }
+
+  ngAfterContentChecked(): void {
+    console.log('Ng AfterContentCheck Trigger');
   }
 }
