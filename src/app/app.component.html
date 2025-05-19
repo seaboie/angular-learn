@@ -1,9 +1,36 @@
 <div class="p-4">
-    <div>{{ angular | slice : 6 }}</div>
-    <div>{{ angularWorld | slice : 6 : 16 }}</div>
+
+    <!-- Custom Pipe -->
+    <h1>{{ today | thaiFormatDate }}</h1>
+    <!-- Output: "24 ก.พ. 2567" -->
+
+    <p>{{ today | thaiFormatDate: 'short' }}</p>
+    <!-- Output: "24 ก.พ. 2567" -->
+
+    <h1>{{ today | thaiFormatDate: 'fullDate' }}</h1>
+    <!-- 19/5/2568 -->
+
+    <p>{{ today | thaiFormatDate: 'long' }}</p>
+    <!-- Output: "24 กุมภาพันธ์ 2567" -->
+
+    <p>{{ today | thaiFormatDate: 'full' }}</p>
+    <!-- Output: "วันเสาร์ที่ 24 กุมภาพันธ์ พ.ศ. 2567" -->
+
+    <p>{{ today | date: 'H:mm:s a' }}</p>
 
     <hr>
-    <!-- Chanining Pipe -->
-     <div>{{ angular | slice : 6 | uppercase }}</div>
-     <div>{{ angularWorld | slice : 6 : 16 | lowercase }}</div>
+
+    <!-- ThaiFormatDateTime -->
+    <p>Short : {{ today | thaiFormatDateTime }}</p>
+    <!-- Output: "24 ก.พ. 2567" -->
+
+    <p>Long & Time: {{ today | thaiFormatDateTime:'long':true }}</p>
+    <!-- Output: "24 กุมภาพันธ์ 2567 14:30 น." -->
+
+    <p>Full date with 12-hour time: {{ today | thaiFormatDateTime:'full':true:'h:mm a' }}</p>
+    <!-- Output: "วันเสาร์ที่ 24 กุมภาพันธ์ พ.ศ. 2567 2:30 PM น." -->
+
+    <p>Custom format: {{ today | thaiFormatDateTime:'short':true:'H:mm' }}</p>
+    <!-- Output: "24 ก.พ. 2567 14:30 น." -->
+
 </div>
