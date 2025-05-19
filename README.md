@@ -21,6 +21,8 @@ export class AppComponent {
 
   title: string = 'angular app';
   num: number = 123456;
+  // Date
+  today = new Date();
 
   constructor() {}
 
@@ -30,10 +32,40 @@ export class AppComponent {
 > app.component.html  
 
 ```html
-<h1>{{title | titlecase}}</h1>
-<h1>{{title | uppercase}}</h1>
-<h1>{{ num | currency }}</h1>
-<h1>{{ num | percent }} </h1>
-<h1>{{ 1234567.89 | number }}</h1>
+<div class="p-4">
+    <h1>{{title | titlecase}}</h1>
+    <h1>{{title | uppercase}}</h1>
+    <h1>{{ num | percent }} </h1>
+    <h1>{{ 1234567.89 | number }}</h1>
+    <h1>{{ num | currency }}</h1>
+    <h1>{{ 100000 | currency : 'EUR'}}</h1>
+    <h1>{{ 100000 | currency : 'GBP'}}</h1>
+    <h1>{{ 100000 | currency : 'THB'}}</h1>
+    <h1>{{ 100000 | currency : 'JPY'}}</h1>
+
+    <hr>
+    <!-- Date & Time Pipe -->
+     <h1>{{ today }}</h1>
+     <h1>{{ today | date }}</h1>
+     <h1>{{ today | date : 'short' }}</h1>
+     <h1>{{ today | date : 'medium' }}</h1>
+     <h1>{{ today | date : 'long' }}</h1>
+     <h1>{{ today | date : 'full' }}</h1>
+
+     <hr>
+
+     <!-- Date custom format -->
+      <h1>{{ today | date : 'dd : MM : yyyy'}}</h1>
+      <h1>{{ today | date : 'MMMM : dd : yyyy'}}</h1>
+
+      <hr>
+
+      <!-- Time format -->
+       <h1>{{ today | date : 'hh : mm : ss a'}}</h1>
+       <h1>{{ today | date : 'HH : mm : ss a'}}</h1>
+
+       <!-- 16 : 14 : 28 PM GMT+7   : z  :  timezone -->
+       <h1>{{ today | date : 'HH : mm : ss a z'}}</h1>
+</div>
 ```  
 

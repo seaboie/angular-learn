@@ -11,6 +11,8 @@ export class AppComponent {
 
   title: string = 'angular app';
   num: number = 123456;
+  // Date
+  today = new Date();
 
   constructor() {}
 
