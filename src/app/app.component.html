@@ -1,4 +1,9 @@
 <div class="p-4">
     <div>{{ angular | slice : 6 }}</div>
     <div>{{ angularWorld | slice : 6 : 16 }}</div>
+
+    <hr>
+    <!-- Chanining Pipe -->
+     <div>{{ angular | slice : 6 | uppercase }}</div>
+     <div>{{ angularWorld | slice : 6 : 16 | lowercase }}</div>
 </div>

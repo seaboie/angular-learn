@@ -5,12 +5,17 @@
 [Angular 18 Full Course (part 20) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=rvIEW5pW7YQ&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=9)  
 
 
-## 🛠️ 🛠️ 🛠️  Pipe Slice
+## 🛠️ 🛠️ 🛠️  Pipe Chaining  
+
+### Apply multiple pipes to a single value  
 
 
 > app.component.ts
 
 ```ts
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   imports: [CommonModule],
@@ -31,6 +36,11 @@ export class AppComponent {
 <div class="p-4">
     <div>{{ angular | slice : 6 }}</div>
     <div>{{ angularWorld | slice : 6 : 16 }}</div>
+
+    <hr>
+    <!-- Chanining Pipe -->
+     <div>{{ angular | slice : 6 | uppercase }}</div>
+     <div>{{ angularWorld | slice : 6 : 16 | lowercase }}</div>
 </div>
 ```  
 
