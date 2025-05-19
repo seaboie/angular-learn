@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+interface UserInterface {
+  name: string;
+  age: number;
+  email: string
+}
+
 @Component({
   selector: 'app-root',
   imports: [CommonModule],
@@ -9,11 +15,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title: string = 'angular app';
-  num: number = 123456;
-  // Date
-  today = new Date();
-
-  constructor() {}
+  user: UserInterface = {
+    name: 'John Doe',
+    age: 30,
+    email: 'john@doe.com'
+  }
 
 }
