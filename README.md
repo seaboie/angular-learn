@@ -2,27 +2,38 @@
 
 ## On Youtube
 
-[Angular 18 Full Course (Part 19) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=7mtAFR1g_M0&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=12)  
+[Angular 18 Full Course (part 20) - Complete Zero to Hero Angular 18 full Tutorial](https://www.youtube.com/watch?v=rvIEW5pW7YQ&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=9)  
 
 
-## 🛠️ 🛠️ 🛠️  ngOnDestroy
-### Triggered before remove component from the Dom
+## 🛠️ 🛠️ 🛠️  Pipe
 
 
-> profile.component.ts
+> app.component.ts
 
 ```ts
 @Component({
-  selector: 'app-profile',
-  imports: [],
-  templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  selector: 'app-root',
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
 })
-export class ProfileComponent implements OnInit {
+export class AppComponent {
 
-  ngOnDestroy(): void {
-    console.log('Ng OnDestroy Triggered');
-  }
-  
+  title: string = 'angular app';
+  num: number = 123456;
+
+  constructor() {}
+
 }
 ```  
+
+> app.component.html  
+
+```html
+<h1>{{title | titlecase}}</h1>
+<h1>{{title | uppercase}}</h1>
+<h1>{{ num | currency }}</h1>
+<h1>{{ num | percent }} </h1>
+<h1>{{ 1234567.89 | number }}</h1>
+```  
+

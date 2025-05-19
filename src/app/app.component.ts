@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewContainerRef } from '@angular/core';
-import { ProfileComponent } from './widgets/profile/profile.component';
-import { PostsListComponent } from './widgets/posts-list/posts-list.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +8,10 @@ import { PostsListComponent } from './widgets/posts-list/posts-list.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  constructor(private viewContainer: ViewContainerRef) {}
 
-  userName: string = 'John Doe';
-  changeUsername() {
-    this.userName = 'John Smith';
-  }
+  title: string = 'angular app';
+  num: number = 123456;
 
-  loadProfileComponent() {
-    this.viewContainer.createComponent(ProfileComponent);
-  }
+  constructor() {}
 
-  removeProfileComponent() {
-    this.viewContainer.remove();
-  }
 }
