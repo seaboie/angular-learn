@@ -1,16 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ThaiFormatDateTimePipe } from './pipe/thai-format-date-time/thai-format-date-time.pipe';
-import { ThaiFormatDatePipe } from './pipe/thai-format-date/thai-format-date.pipe';
+import { UserInterface, UserService } from './services/user/user.service';
+import { PostsListComponent } from "./widgets/posts-list/posts-list.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, ThaiFormatDatePipe, ThaiFormatDateTimePipe],
+  imports: [CommonModule, PostsListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
 
-  today = new Date();
+  userService: any;
+  users: UserInterface[] = [];
 
+  constructor(private userServiceDependencyInjection: UserService) {
+   this.userService = userServiceDependencyInjection;
+   this.users = this.userService.users;
+   
+  }
 }

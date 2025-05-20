@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
 import { UserInterface, UserService } from '../../services/user/user.service';
-import { UserComponent } from "../../widgets/user/user.component";
 import { CommonModule } from '@angular/common';
 
-
 @Component({
-  selector: 'app-posts-list',
-  imports: [UserComponent, CommonModule],
-  templateUrl: './posts-list.component.html',
-  styleUrl: './posts-list.component.css'
+  selector: 'app-user',
+  imports: [CommonModule],
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.css'
 })
-export class PostsListComponent {
-  // @Input() childUser: any;
+export class UserComponent {
 
   userService: any;
   users: UserInterface[] = [];
