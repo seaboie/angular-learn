@@ -1,13 +1,18 @@
-<div class="p-4">
+<div class="p-4 grid w-full h-screen place-items-center">
 
-    <app-posts-list></app-posts-list>
+    <div class="w-lg">
+        <h1 class="text-2xl font-semibold">User Form</h1>
+        <form (ngSubmit)="formSubmit(form)" #form="ngForm">
+            <input class="input-nice" type="text" name="name" id="" placeholder="Name" ngModel>
+            <input class="input-nice" type="email" name="email" id="" placeholder="Email" ngModel>
+            <input class="input-nice" type="text" name="address" id="" placeholder="Address" ngModel>
 
-    <hr>
-    <h1>- Come from AppComponent</h1>
-    <h1>{{users | json}}</h1>
-
-    <hr>
+            <button type="submit" class="btn-primary">Submit</button>
+        </form>
+        <hr>
+        <h1>{{userForm.name}}</h1>
+        <h1>{{userForm.email}}</h1>
+        <h1>{{userForm.address}}</h1>
+    </div>
     
-    <h1 *ngFor="let user of users">{{user.name}}</h1>
-
 </div>

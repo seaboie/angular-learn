@@ -1,86 +1,94 @@
 # Tutorial
 
 ## On Youtube  
-**[Angular Full Course (Part 23) - Angular 18 Services](https://www.youtube.com/watch?v=Ph6eqQU2O3c&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=6)**  
-
-**[Angular Full Course (Part 24) - Angular Services](https://www.youtube.com/watch?v=9Nkzl0H8hmI&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=6)**  
+**[Angular 18 Full Course (part 26) - Angular Template Driven Forms](https://www.youtube.com/watch?v=m9UxsZ4F_gs&list=PLG6SdLSnBhdWj797VAEvABNYIBEaVQnfF&index=5)**  
 
 
-## 🛠️ 🛠️ 🛠️  Services & Dependency Injection    
+## 🛠️ 🛠️ 🛠️  Template Driven Forms    
 
-### Command line to create `pipe` file  
-```bash
-ng g s services/user/user
-```  
-
-> user.service.ts  
+> form.utils.ts  
 
 ```ts
-import { Injectable } from '@angular/core';
+import { NgForm } from "@angular/forms";
 
-export interface UserInterface {
-  name: string;
-  age: number;
-  email: string
-}
+export abstract class FormUtils {
+    static getFormValues<T>(form: NgForm): T {
+        return form.value as T;
+    }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class UserService {
-
-  users: UserInterface[] = [
-    {name: 'John Doe', age: 30, email: 'john@doe.com'},
-    {name: 'John Smith', age: 24, email: 'john@smith.com'},
-    {name: 'Liza Ann', age: 50, email: 'liza@ann.com'},
-    {name: 'Sam Smith', age: 43, email: 'sam@smith.com'}
-  ]
-
-  constructor() { 
-    console.log('User service new instance created !!!!!!!');
-  }
+    static logFormErrors(form: NgForm): void {
+        Object.keys(form.controls).forEach((key) => {
+            const control = form.controls[key];
+            if (control.errors) {
+                console.log(`${key} errors: `, control.errors);
+            }
+        })
+    }
 }
 ```  
+
+---  
 
 > app.component.ts
 
 ```ts
+export interface UserFormModel {
+    name: string;
+    email: string;
+    address: string;
+}
+
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, PostsListComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  userForm: UserFormModel = {
+    name: '',
+    email: '',
+    address: ''
+  }
 
-  userService: any;
-  users: UserInterface[] = [];
+  constructor() {}
 
-  constructor(private userServiceDependencyInjection: UserService) {
-   this.userService = userServiceDependencyInjection;
-   this.users = this.userService.users;
-   
+  formSubmit(form: NgForm) {
+    this.userForm = FormUtils.getFormValues<UserFormModel>(form);
   }
 }
 ```  
+
+- Use Utils method : `FormUtils.getFormValues<UserFormModel>(form)`  
 
 ---  
 
 > app.component.html
 
 ```html
-<div class="p-4">
+<div class="p-4 grid w-full h-screen place-items-center">
 
-    <app-posts-list></app-posts-list>
+    <div class="w-lg">
+        <h1 class="text-2xl font-semibold">User Form</h1>
+        <form (ngSubmit)="formSubmit(form)" #form="ngForm">
+            <input class="input-nice" type="text" name="name" id="" placeholder="Name" ngModel>
+            <input class="input-nice" type="email" name="email" id="" placeholder="Email" ngModel>
+            <input class="input-nice" type="text" name="address" id="" placeholder="Address" ngModel>
 
-    <hr>
-    <h1>- Come from AppComponent</h1>
-    <h1>{{users | json}}</h1>
-
-    <hr>
+            <button type="submit" class="btn-primary">Submit</button>
+        </form>
+        <hr>
+        <h1>{{userForm.name}}</h1>
+        <h1>{{userForm.email}}</h1>
+        <h1>{{userForm.address}}</h1>
+    </div>
     
-    <h1 *ngFor="let user of users">{{user.name}}</h1>
-
 </div>
 ```  
 
+- Must have : `<form (ngSubmit)="formSubmit(form)" #form="ngForm">`  
+  - `(ngSubmit)="formSubmit(form)"` 
+  - `#form="ngForm"` `form` variable template
+- Must have : `<input class="input-nice" type="text" name="name" id="" placeholder="Name" ngModel>` 
+  - `name="name"` 
+  - `ngModel`  
