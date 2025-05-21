@@ -1,37 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { FormUtils } from './core/utils/form.utils';
-
-export interface UserFormModel {
-    fullname: string;
-    email: string;
-    address: string;
-}
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+  // new Instance of form group
+  userForm = new FormGroup({
+    // new Instance of form control
+    fname : new FormControl(),
+    femail : new FormControl(),
+    faddress : new FormControl(),
+  });
 
-  userForm?: UserFormModel;
-
-  constructor() {}
-
-  formSubmit(form: NgForm) {
-    this.userForm = {
-      ...this.userForm,
-      ...FormUtils.getFormValues<UserFormModel>(form)
-    }
+  onSubmitR() {
     console.log(this.userForm);
-    
-  }
-
-  getValue(fullname: any) {
-    console.log(fullname);
-    
   }
 }

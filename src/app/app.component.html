@@ -2,61 +2,15 @@
 
     <div class="w-lg">
         <h1 class="text-2xl font-semibold">User Form</h1>
-        <form (ngSubmit)="formSubmit(form)" #form="ngForm">
-            <input class="input-nice" type="text" name="fullname" id="fullname" autocomplete="fullname"
-                placeholder="Name" ngModel #fullname="ngModel" (change)="getValue(fullname)"
-                [class.ng-invalid]="fullname.invalid && (fullname.dirty || fullname.touched)"  minlength="3" maxlength="10" required>
-            <div>
-                @if (fullname.invalid && (fullname.dirty || fullname.touched)) {
-                    @if (fullname.hasError('required')) {
-                        <p class="text-red-700">Fullname is required...</p>
-                    }
-                    @if (fullname.hasError('minlength')) {
-                        <p class="text-red-700">Name must be atleast 3 charactors long...</p>
-                    }
-                }
-            </div>
-            <pre>Validation Errors:  {{ fullname.errors | json }}</pre>
-            <input 
-                class="input-nice" 
-                type="email" 
-                name="email" 
-                id="email" 
-                autocomplete="email" 
-                placeholder="Email"
-                #email="ngModel"
-                ngModel
-                required
-                pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-                [class.ng-invalid]="email.invalid && email.touched"
-            >
-            <div>
-                @if (email.invalid && email.touched) {
-                    @if (email.hasError('required')) {
-                        <p class="text-red-700">Email is required...</p>
-                    }
-                    @if (email.hasError('pattern')) {
-                        <p class="text-red-700">Invalid email address...</p>
-                    }
-                }
-            </div>
-            <pre>Validation Errors:  {{ email.errors | json }}</pre>
-            <textarea class="input-nice" name="address" id="address" placeholder="address" ngModel #address="ngModel" required [class.ng-invalid]="address.invalid && address.touched"></textarea>
-            <div>
-                @if (address.invalid && address.touched) {
-                    @if (address.hasError('required')) {
-                        <p class="text-red-700">Address is required...</p>
-                    }
-                }
-            </div>
-            <pre>Validation Errors:  {{ address.errors | json }}</pre>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmitR()">
+            <input class="input-nice" type="text" name="name" id="name" placeholder="Name" autocomplete="name" formControlName="fname">
+            <input class="input-nice" type="email" name="email" id="email" placeholder="Email address" autocomplete="email" formControlName="femail">
+            <textarea class="input-nice" name="address" id="address" autocomplete="address" formControlName="faddress"></textarea>
 
-            <button type="submit" class="btn-primary" [disabled]="form.invalid">Submit</button>
+            <button class="btn-primary" type="submit">Submit</button>
         </form>
         <hr>
-        <h1 *ngIf="userForm">{{userForm.fullname}}</h1>
-        <h1 *ngIf="userForm">{{userForm.email}}</h1>
-        <h1 *ngIf="userForm">{{userForm.address}}</h1>
+        
     </div>
 
 </div>
