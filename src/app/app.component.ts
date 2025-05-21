@@ -4,7 +4,7 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { FormUtils } from './core/utils/form.utils';
 
 export interface UserFormModel {
-    name: string;
+    fullname: string;
     email: string;
     address: string;
 }
@@ -26,5 +26,12 @@ export class AppComponent {
       ...this.userForm,
       ...FormUtils.getFormValues<UserFormModel>(form)
     }
+    console.log(this.userForm);
+    
+  }
+
+  getValue(fullname: any) {
+    console.log(fullname);
+    
   }
 }

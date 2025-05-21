@@ -1,23 +1,6 @@
-.login {
-    font-size: 48px;
-    color: green;
-    text-transform: uppercase;
+input.ng-invalid {
+    border: 2px solid red;
 }
-
-.logout {
-    font-size: 48px;
-    color: red;
-    text-transform: lowercase;
-}
-
-.one {
-    text-decoration: line-through;
-}
-
-.two {
-    background-color: red;
-}
-
-.three {
-    font-size: 48px;
+textarea.ng-invalid {
+    border: 2px solid red;
 }
