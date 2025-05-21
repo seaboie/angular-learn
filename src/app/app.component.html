@@ -3,14 +3,61 @@
     <div class="w-lg">
         <h1 class="text-2xl font-semibold">User Form</h1>
         <form [formGroup]="userForm" (ngSubmit)="onSubmitR()">
-            <input class="input-nice" type="text" name="name" id="name" placeholder="Name" autocomplete="name" formControlName="fname">
-            <input class="input-nice" type="email" name="email" id="email" placeholder="Email address" autocomplete="email" formControlName="femail">
-            <textarea class="input-nice" name="address" id="address" autocomplete="address" formControlName="faddress"></textarea>
+            <input class="input-nice" type="text" name="name" id="name" placeholder="Name" autocomplete="name"
+                formControlName="fname"
+                [class.ng-invalid]="userForm.get('fname')?.touched && userForm.get('fname')?.invalid">
+            <div>
+                @if (userForm.get('fname')?.touched && userForm.get('fname')?.invalid) {
+                @if (userForm.get('fname')?.hasError('required') ) {
+                <p class="text-red-700">Name cannot be empty</p>
+                }
+                @if (userForm.get('fname')?.hasError('minlength')) {
+                <p class="text-red-700">Name must be at least 3 characters</p>
+                }
+                @if (userForm.get('fname')?.hasError('maxlength')) {
+                <p class="text-red-700">
+                    You typed {{ userForm.get('fname')?.errors?.['maxlength'].acactualLength }} chars,
+                    but max is {{ userForm.get('fname')?.errors?.['maxlength'].requiredLength }}.
+                </p>
+                }
+                }
+
+                <pre>Form Errors: {{ userForm.get('fname')?.errors | json }}</pre>
+            </div>
+            <input class="input-nice" type="email" name="email" id="email" placeholder="Email address"
+                autocomplete="email" formControlName="femail"
+                [class.ng-invalid]="userForm.get('femail')?.touched && userForm.get('femail')?.invalid">
+            <div>
+                @if (userForm.get('femail')?.touched && userForm.get('femail')?.invalid) {
+                @if (userForm.get('femail')?.hasError('required')) {
+                <p class="text-red-700">Email is required !!! </p>
+                }
+                @if (userForm.get('femail')?.hasError('email')) {
+                <p class="text-red-700">Please insert a Valid email address !!!</p>
+                }
+                }
+                <pre>Form Errors: {{ userForm.get('femail')?.errors | json }}</pre>
+            </div>
+            <textarea class="input-nice" name="address" id="address" autocomplete="address"
+                formControlName="faddress" [class.ng-invalid]="userForm.get('femail')?.touched && userForm.get('femail')?.invalid"></textarea>
+
+            <div>
+                @if (userForm.get('faddress')?.touched && userForm.get('faddress')?.invalid) {
+                @if (userForm.get('faddress')?.hasError('required') ) {
+                <p class="text-red-700">Address cannot be empty</p>
+                }
+                @if (userForm.get('faddress')?.hasError('minlength')) {
+                <p class="text-red-700">Address must be at least 10 characters</p>
+                }
+                }
+
+                <pre>Form Errors: {{ userForm.get('faddress')?.errors | json }}</pre>
+            </div>
 
             <button class="btn-primary" type="submit">Submit</button>
         </form>
         <hr>
-        
+
     </div>
 
 </div>
