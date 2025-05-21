@@ -16,15 +16,15 @@ export interface UserFormModel {
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  userForm: UserFormModel = {
-    name: '',
-    email: '',
-    address: ''
-  }
+
+  userForm?: UserFormModel;
 
   constructor() {}
 
   formSubmit(form: NgForm) {
-    this.userForm = FormUtils.getFormValues<UserFormModel>(form);
+    this.userForm = {
+      ...this.userForm,
+      ...FormUtils.getFormValues<UserFormModel>(form)
+    }
   }
 }
