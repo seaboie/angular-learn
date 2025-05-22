@@ -3,26 +3,18 @@
     <div class="w-lg">
         <h1 class="text-2xl font-semibold">User Form</h1>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            
 
-            <input class="input-nice" type="text" name="firstname" placeholder="Firstname" autocomplete="firstname"
-                formControlName="firstname"
-                [class.ng-invalid]="isInvalidClass('firstname')"
-                >
+                <app-share-form-field
+                    *ngFor="let field of formFields"
+                    [control]="form.get(field.controlName)!"
+                    [fieldName]="field.fieldName"
+                    [type]="field.type"
+                    [name]="field.controlName"
+                    [placeholder]="field.placeholder"
+                    [autocomplete]="field.autocomplete"
 
-            <app-validation-input-message [control]="form.controls.firstname" fieldName="First Name" />
-            <pre>Error : {{form.controls.firstname.errors | json}}</pre>
-
-            <input class="input-nice" type="email" name="email" placeholder="Email address" autocomplete="email" [class.ng-invalid]="isInvalidClass('email')"
-                formControlName="email">
-            <app-validation-input-message [control]="form.controls.email" fieldName="Email" />
-            <pre>Error : {{form.controls.email.errors | json}}</pre>
-
-
-            <textarea class="input-nice" name="address" autocomplete="address" [class.ng-invalid]="isInvalidClass('address')" formControlName="address"></textarea>
-            <app-validation-input-message [control]="form.controls.address" fieldName="Address Field" />
-            <pre>Error : {{form.controls.address.errors | json}}</pre>
-
-
+                 />
 
             <button [disabled]="form.invalid" class="btn-primary" type="submit">Submit</button>
         </form>
