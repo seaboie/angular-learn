@@ -7,55 +7,196 @@
 
 ## 🛠️ 🛠️ 🛠️ Reactive Form
 
+
+###  Form shared component  
+
+> share-form-field.component.ts  
+
+```ts
+import { Component, Input } from '@angular/core';
+import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ValidationInputMessageComponent } from "../validation-input-message/validation-input-message.component";
+
+@Component({
+  selector: 'app-share-form-field',
+  standalone: true,
+  imports: [ReactiveFormsModule, ValidationInputMessageComponent],
+  template: `
+  @if (type === 'textarea') {
+    <textarea
+      class="input-nice" 
+      [name]="name"
+      [placeholder]="placeholder"
+      [autocomplete]="autocomplete"
+      [formControl]="formControl"
+      [class.ng-invalid]="isInvalid()"
+    ></textarea>
+  } @else {
+    <input
+      class="input-nice" 
+      [type]="type"
+      [name]="name"
+      [placeholder]="placeholder"
+      [autocomplete]="autocomplete"
+      [formControl]="formControl"
+      [class.ng-invalid]="isInvalid()"
+    >
+  }
+   <app-validation-input-message [control]="control" [fieldName]="fieldName" />
+  `,
+  styleUrl: './share-form-field.component.css'
+})
+export class ShareFormFieldComponent {
+  @Input() control!: AbstractControl;
+  @Input() fieldName!: string;
+  @Input() type: string = 'text';
+  @Input() name!: string;
+  @Input() placeholder: string = '';
+  @Input() autocomplete: string = '';
+
+  isInvalid(): boolean {
+    return this.control?.invalid && (this.control.touched || this.control.dirty);
+  }
+
+  get formControl(): FormControl {
+    return this.control as FormControl ;
+  }
+}
+```  
+
+---  
+
+### Validate component  
+
+> validation-input-message.component.ts  
+
+```ts
+import { Component, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-validation-input-message',
+  imports: [],
+  template: ` 
+    @if (control?.invalid && (control?.touched || control?.dirty)) {
+      @if (control?.errors?.['required']) {
+        <small>* {{fieldName}} is a required field !!!</small>
+      }
+      @if (control?.errors?.['minlength']) {
+        <small>* {{fieldName}} must be at least 
+          {{control?.errors?.['minlength'].requiredLength}} characters long : Now is 
+          {{control?.errors?.['minlength'].actualLength}} characters. !!!</small>
+      }
+      @if (control?.errors?.['maxlength']) {
+        <small>* {{fieldName}} must not exceed 
+          {{control?.errors?.['maxlength'].requiredLength}} characters long : Now is 
+          {{control?.errors?.['maxlength'].actualLength}} !!!</small>
+      }
+      @if (control?.errors?.['email']) {
+        <small>* Please enter a valid email address.</small>
+      }
+    }
+  `,
+  styles: [
+    `
+      small {
+        color: #dc2626;
+      }
+    `,
+  ],
+})
+export class ValidationInputMessageComponent {
+  @Input() control: AbstractControl | null = null;
+  @Input() fieldName: string = 'Field';
+}
+```  
+
+---  
+
 > app.component.ts
 
 ```ts
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
-  FormControl,
-  FormGroup,
   FormsModule,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ShareFormFieldComponent } from "./shared/components/share-form-field/share-form-field.component";
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ShareFormFieldComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // new Instance of form group
-  userForm = new FormGroup({
-    // new Instance of form control
-    fname : new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-    femail : new FormControl('', [Validators.required, Validators.email]),
-    faddress : new FormControl('', [Validators.required, Validators.minLength(10)]),
+  fb = inject(NonNullableFormBuilder);
+  form = this.fb.group({
+    firstname: this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(10),
+      ],
+    }),
+    email: this.fb.control('', {
+      validators: [Validators.required, Validators.email],
+    }),
+    address: this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(12),
+      ],
+    }),
   });
 
-  onSubmitR() {
-    console.log(this.userForm);
-    console.log(this.userForm.get('fname'));
-    
+  onSubmit() {
+    console.log(this.form.getRawValue(), this.form.controls.firstname.errors);
   }
+
+  // Solved problem of css : first loaded has border color
+  isInvalidClass(controlName: string): boolean {
+    const control = this.form.get(controlName);
+    return control
+      ? control.invalid && (control.touched || control.dirty)
+      : false;
+  }
+
+  formFields = [
+    {
+      controlName: 'firstname',
+      fieldName: 'First Name',
+      type: 'text',
+      placeholder: 'Firstname',
+      autocomplete: 'firstname',
+    },
+    {
+      controlName: 'email',
+      fieldName: 'Email',
+      type: 'email',
+      placeholder: 'Email address',
+      autocomplete: 'email',
+    },
+    {
+      controlName: 'address',
+      fieldName: 'Address',
+      type: 'textarea',
+      placeholder: 'Address',
+      autocomplete: 'address',
+    },
+  ];
 }
-
 ```
 
-- Import : `imports: [FormGroup, FormControl, CommonModule, FormsModule, ReactiveFormsModule, Validators]`
-- Declare : Instance FormGroup variable
-
-```ts
-// new Instance of form group
-  userForm = new FormGroup({
-    // new Instance of form control
-    fname : new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-    femail : new FormControl('', [Validators.required, Validators.email]),
-    faddress : new FormControl('', [Validators.required, Validators.minLength(10)]),
-  });
-```
 
 ---
 
@@ -66,59 +207,21 @@ export class AppComponent {
 
     <div class="w-lg">
         <h1 class="text-2xl font-semibold">User Form</h1>
-        <form [formGroup]="userForm" (ngSubmit)="onSubmitR()">
-            <input class="input-nice" type="text" name="name" id="name" placeholder="Name" autocomplete="name"
-                formControlName="fname"
-                [class.ng-invalid]="userForm.get('fname')?.touched && userForm.get('fname')?.invalid">
-            <div>
-                @if (userForm.get('fname')?.touched && userForm.get('fname')?.invalid) {
-                @if (userForm.get('fname')?.hasError('required') ) {
-                <p class="text-red-700">Name cannot be empty</p>
-                }
-                @if (userForm.get('fname')?.hasError('minlength')) {
-                <p class="text-red-700">Name must be at least 3 characters</p>
-                }
-                @if (userForm.get('fname')?.hasError('maxlength')) {
-                <p class="text-red-700">
-                    You typed {{ userForm.get('fname')?.errors?.['maxlength'].acactualLength }} chars,
-                    but max is {{ userForm.get('fname')?.errors?.['maxlength'].requiredLength }}.
-                </p>
-                }
-                }
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            
 
-                <pre>Form Errors: {{ userForm.get('fname')?.errors | json }}</pre>
-            </div>
-            <input class="input-nice" type="email" name="email" id="email" placeholder="Email address"
-                autocomplete="email" formControlName="femail"
-                [class.ng-invalid]="userForm.get('femail')?.touched && userForm.get('femail')?.invalid">
-            <div>
-                @if (userForm.get('femail')?.touched && userForm.get('femail')?.invalid) {
-                @if (userForm.get('femail')?.hasError('required')) {
-                <p class="text-red-700">Email is required !!! </p>
-                }
-                @if (userForm.get('femail')?.hasError('email')) {
-                <p class="text-red-700">Please insert a Valid email address !!!</p>
-                }
-                }
-                <pre>Form Errors: {{ userForm.get('femail')?.errors | json }}</pre>
-            </div>
-            <textarea class="input-nice" name="address" id="address" autocomplete="address"
-                formControlName="faddress" [class.ng-invalid]="userForm.get('femail')?.touched && userForm.get('femail')?.invalid"></textarea>
+                <app-share-form-field
+                    *ngFor="let field of formFields"
+                    [control]="form.get(field.controlName)!"
+                    [fieldName]="field.fieldName"
+                    [type]="field.type"
+                    [name]="field.controlName"
+                    [placeholder]="field.placeholder"
+                    [autocomplete]="field.autocomplete"
 
-            <div>
-                @if (userForm.get('faddress')?.touched && userForm.get('faddress')?.invalid) {
-                @if (userForm.get('faddress')?.hasError('required') ) {
-                <p class="text-red-700">Address cannot be empty</p>
-                }
-                @if (userForm.get('faddress')?.hasError('minlength')) {
-                <p class="text-red-700">Address must be at least 10 characters</p>
-                }
-                }
+                 />
 
-                <pre>Form Errors: {{ userForm.get('faddress')?.errors | json }}</pre>
-            </div>
-
-            <button class="btn-primary" type="submit">Submit</button>
+            <button [disabled]="form.invalid" class="btn-primary" type="submit">Submit</button>
         </form>
         <hr>
 
@@ -127,6 +230,3 @@ export class AppComponent {
 </div>
 ```
 
-- Use : `<form [formGroup]="userForm" (ngSubmit)="onSubmitR()">`
-- Use : `formControlName="fname"`  
-  - `<input class="input-nice" type="text" name="name" id="name" placeholder="Name" autocomplete="name" formControlName="fname">` 
