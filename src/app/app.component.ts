@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormsModule,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -15,17 +16,15 @@ import {
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  // new Instance of form group
-  userForm = new FormGroup({
-    // new Instance of form control
-    fname : new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(12)]),
-    femail : new FormControl('', [Validators.required, Validators.email]),
-    faddress : new FormControl('', [Validators.required, Validators.minLength(10)]),
+  fb = inject(NonNullableFormBuilder);
+  form = this.fb.group({
+    firstname: this.fb.control(''),
+    email: this.fb.control(''),
+    address: this.fb.control('')
   });
 
-  onSubmitR() {
-    console.log(this.userForm);
-    console.log(this.userForm.get('fname'));
+  onSubmit() {
+    console.log(this.form.getRawValue(), this.form.controls.firstname.errors);
     
   }
 }
