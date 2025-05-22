@@ -2,9 +2,8 @@
 
 ## On Youtube
 
-**[Angular 19 Full Course (part 30) - Reactive Forms The SECRET to Mastering Angular 19 Reactive Forms](https://www.youtube.com/watch?v=TNqZo9J83Ok&t=404s)**  
+**[Reactive Form Validation in Angular: Mastering Best Practices](https://www.youtube.com/watch?v=mOYAB1uMyhQs)**  
 
-**[Angular 19 Full Course part 31 - Angular 19 Reactive Forms](https://www.youtube.com/watch?v=L9IRSgPd9D0)**  
 
 ## 🛠️ 🛠️ 🛠️ Reactive Form
 
