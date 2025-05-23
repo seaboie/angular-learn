@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ShareFormFieldComponent } from "./shared/components/share-form-field/share-form-field.component";
+import { map, Observable, of } from 'rxjs';
 
 // Custom Validators method
 export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
@@ -18,6 +19,14 @@ export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
     ? {forbiddenName: true}
     : null;
   }
+}
+
+// Custom Async Validators method
+export const asyncRoleValidator = (control: AbstractControl): Observable<ValidationErrors | null> => {
+  const allowedRoles = ['admin', 'dev'];
+  return of(control.value).pipe(map((value) => {
+    return allowedRoles.includes(value) ? null : {forbidddenRole: 'Role is not allowed'};
+  }))
 }
 
 @Component({
@@ -45,13 +54,17 @@ export class AppComponent {
     email: this.fb.control('', {
       validators: [Validators.required, Validators.email],
     }),
+    role: this.fb.control('', {
+      validators: [Validators.minLength(2)],
+      asyncValidators: [asyncRoleValidator]
+    }),
     address: this.fb.control('', {
       validators: [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(12),
       ],
-    }),
+    }), 
   });
 
   onSubmit() {
@@ -80,6 +93,13 @@ export class AppComponent {
       type: 'email',
       placeholder: 'Email address',
       autocomplete: 'email',
+    },
+    {
+      controlName: 'role',
+      fieldName: 'Role',
+      type: 'text',
+      placeholder: 'Your Role... [admin, dev]',
+      autocomplete: 'Dev',
     },
     {
       controlName: 'address',

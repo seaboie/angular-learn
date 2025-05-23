@@ -2,110 +2,80 @@
 
 ## On Youtube
 
-**[Reactive Form Validation in Angular: Mastering Best Practices](https://www.youtube.com/watch?v=mOYAB1uMyhQs)**  
-
+**[Reactive Form Validation in Angular: Mastering Best Practices](https://www.youtube.com/watch?v=mOYAB1uMyhQs)**
 
 ## 🛠️ 🛠️ 🛠️ Reactive Form
 
+### Form shared component
 
-###  Form shared component  
-
-> share-form-field.component.ts  
+> share-form-field.component.ts
 
 ```ts
-import { Component, Input } from '@angular/core';
-import { AbstractControl, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input } from "@angular/core";
+import { AbstractControl, FormControl, ReactiveFormsModule } from "@angular/forms";
 import { ValidationInputMessageComponent } from "../validation-input-message/validation-input-message.component";
 
 @Component({
-  selector: 'app-share-form-field',
+  selector: "app-share-form-field",
   standalone: true,
   imports: [ReactiveFormsModule, ValidationInputMessageComponent],
   template: `
-  @if (type === 'textarea') {
-    <textarea
-      class="input-nice" 
-      [name]="name"
-      [placeholder]="placeholder"
-      [autocomplete]="autocomplete"
-      [formControl]="formControl"
-      [class.ng-invalid]="isInvalid()"
-    ></textarea>
-  } @else {
-    <input
-      class="input-nice" 
-      [type]="type"
-      [name]="name"
-      [placeholder]="placeholder"
-      [autocomplete]="autocomplete"
-      [formControl]="formControl"
-      [class.ng-invalid]="isInvalid()"
-    >
-  }
-   <app-validation-input-message [control]="control" [fieldName]="fieldName" />
+    @if (type === 'textarea') {
+    <textarea class="input-nice" [name]="name" [placeholder]="placeholder" [autocomplete]="autocomplete" [formControl]="formControl" [class.ng-invalid]="isInvalid()"></textarea>
+    } @else {
+    <input class="input-nice" [type]="type" [name]="name" [placeholder]="placeholder" [autocomplete]="autocomplete" [formControl]="formControl" [class.ng-invalid]="isInvalid()" />
+    }
+    <app-validation-input-message [control]="control" [fieldName]="fieldName" />
   `,
-  styleUrl: './share-form-field.component.css'
+  styleUrl: "./share-form-field.component.css",
 })
 export class ShareFormFieldComponent {
   @Input() control!: AbstractControl;
   @Input() fieldName!: string;
-  @Input() type: string = 'text';
+  @Input() type: string = "text";
   @Input() name!: string;
-  @Input() placeholder: string = '';
-  @Input() autocomplete: string = '';
+  @Input() placeholder: string = "";
+  @Input() autocomplete: string = "";
 
   isInvalid(): boolean {
     return this.control?.invalid && (this.control.touched || this.control.dirty);
   }
 
   get formControl(): FormControl {
-    return this.control as FormControl ;
+    return this.control as FormControl;
   }
 }
-```  
+```
 
----  
+---
 
-### Validate component  
+### Validate component
 
-> validation-input-message.component.ts  
+> validation-input-message.component.ts
 
 ```ts
-import { Component, Input } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { AbstractControl } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: 'app-validation-input-message',
+  selector: "app-validation-input-message",
   imports: [CommonModule],
   template: `
     @if (control?.invalid && (control?.touched || control?.dirty)) { 
-      @if (control?.errors?.['forbiddenName']) {
-        <small>* This name is not allowed</small>
-      }
-      @else {
-        @if (control?.errors?.['required']) {
-          <small>* {{ fieldName }} is a required field !!!</small>
-        } 
-        @if (control?.errors?.['minlength']) {
-          <small>
-            * {{ fieldName }} must be at least
-            {{control?.errors?.['minlength'].requiredLength}} characters long : Now is
-            {{control?.errors?.['minlength'].actualLength}} characters. !!!
-          </small>
-        } 
-        @if (control?.errors?.['maxlength']) {
-          <small>
-            * {{ fieldName }} must not exceed
-            {{control?.errors?.['maxlength'].requiredLength}} characters long : Now is
-            {{control?.errors?.['maxlength'].actualLength}} !!!
-          </small>
-        } 
-        @if (control?.errors?.['email']) {
-          <small>* Please enter a valid email address.</small>
-        }
-      }
-    }
+    @if (control?.errors?.['forbidddenRole']) {
+    <small>* This Role is not allowed</small>
+    } @else if (control?.errors?.['forbiddenName']) {
+    <small>* This name is not allowed</small>
+    } @else { @if (control?.errors?.['required']) {
+    <small>* {{ fieldName }} is a required field !!!</small>
+    } @if (control?.errors?.['minlength']) {
+    <small> * {{ fieldName }} must be at least {{control?.errors?.['minlength'].requiredLength}} characters long : Now is {{control?.errors?.['minlength'].actualLength}} characters. !!! </small>
+    } @if (control?.errors?.['maxlength']) {
+    <small> * {{ fieldName }} must not exceed {{control?.errors?.['maxlength'].requiredLength}} characters long : Now is {{control?.errors?.['maxlength'].actualLength}} !!! </small>
+    } @if (control?.errors?.['email']) {
+    <small>* Please enter a valid email address.</small>
+    } } }
     <p>Error: !!! {{ control?.errors | json }}</p>
   `,
   styles: [
@@ -118,11 +88,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ValidationInputMessageComponent {
   @Input() control: AbstractControl | null = null;
-  @Input() fieldName: string = 'Field';
+  @Input() fieldName: string = "Field";
 }
-```  
+```
 
----  
+---
 
 > app.component.ts
 
@@ -139,6 +109,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ShareFormFieldComponent } from "./shared/components/share-form-field/share-form-field.component";
+import { map, Observable, of } from 'rxjs';
 
 // Custom Validators method
 export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
@@ -147,6 +118,14 @@ export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
     ? {forbiddenName: true}
     : null;
   }
+}
+
+// Custom Async Validators method
+export const asyncRoleValidator = (control: AbstractControl): Observable<ValidationErrors | null> => {
+  const allowedRoles = ['admin', 'dev'];
+  return of(control.value).pipe(map((value) => {
+    return allowedRoles.includes(value) ? null : {forbidddenRole: 'Role is not allowed'};
+  }))
 }
 
 @Component({
@@ -168,11 +147,15 @@ export class AppComponent {
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
-        forbiddenNameValidator(['foo', 'footer'])  // ***  Usage
+        forbiddenNameValidator(['foo', 'footer'])
       ],
     }),
     email: this.fb.control('', {
       validators: [Validators.required, Validators.email],
+    }),
+    role: this.fb.control('', {
+      validators: [Validators.minLength(2)],
+      asyncValidators: [asyncRoleValidator]
     }),
     address: this.fb.control('', {
       validators: [
@@ -180,7 +163,7 @@ export class AppComponent {
         Validators.minLength(3),
         Validators.maxLength(12),
       ],
-    }),
+    }), 
   });
 
   onSubmit() {
@@ -211,6 +194,13 @@ export class AppComponent {
       autocomplete: 'email',
     },
     {
+      controlName: 'role',
+      fieldName: 'Role',
+      type: 'text',
+      placeholder: 'Your Role... [admin, dev]',
+      autocomplete: 'Dev',
+    },
+    {
       controlName: 'address',
       fieldName: 'Address',
       type: 'textarea',
@@ -221,36 +211,20 @@ export class AppComponent {
 }
 ```
 
-
 ---
 
 > app.component.html
 
 ```html
 <div class="p-4 grid w-full h-screen place-items-center">
+  <div class="w-lg">
+    <h1 class="text-2xl font-semibold">User Form</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <app-share-form-field *ngFor="let field of formFields" [control]="form.get(field.controlName)!" [fieldName]="field.fieldName" [type]="field.type" [name]="field.controlName" [placeholder]="field.placeholder" [autocomplete]="field.autocomplete" />
 
-    <div class="w-lg">
-        <h1 class="text-2xl font-semibold">User Form</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            
-
-                <app-share-form-field
-                    *ngFor="let field of formFields"
-                    [control]="form.get(field.controlName)!"
-                    [fieldName]="field.fieldName"
-                    [type]="field.type"
-                    [name]="field.controlName"
-                    [placeholder]="field.placeholder"
-                    [autocomplete]="field.autocomplete"
-
-                 />
-
-            <button [disabled]="form.invalid" class="btn-primary" type="submit">Submit</button>
-        </form>
-        <hr>
-
-    </div>
-
+      <button [disabled]="form.invalid" class="btn-primary" type="submit">Submit</button>
+    </form>
+    <hr />
+  </div>
 </div>
 ```
-
