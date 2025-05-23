@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { ShareFormFieldComponent } from "./shared/components/share-form-field/share-form-field.component";
 
+// Custom Validators method
 export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
     return names.includes(control.value)
