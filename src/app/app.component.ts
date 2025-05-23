@@ -1,12 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
+  AbstractControl,
   FormsModule,
   NonNullableFormBuilder,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ShareFormFieldComponent } from "./shared/components/share-form-field/share-form-field.component";
+
+export const forbiddenNameValidator = (names: string[]): ValidatorFn => {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return names.includes(control.value)
+    ? {forbiddenName: true}
+    : null;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -27,6 +38,7 @@ export class AppComponent {
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
+        forbiddenNameValidator(['foo', 'footer'])
       ],
     }),
     email: this.fb.control('', {
