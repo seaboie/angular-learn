@@ -2,23 +2,25 @@
 
     <div class="w-lg">
         <h1 class="text-2xl font-semibold">User Form</h1>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-                <app-share-form-field
-                    *ngFor="let field of formFields"
-                    [control]="form.get(field.controlName)!"
-                    [fieldName]="field.fieldName"
-                    [type]="field.type"
-                    [name]="field.controlName"
-                    [placeholder]="field.placeholder"
-                    [autocomplete]="field.autocomplete"
+            <input class="input-nice" type="text" name="" id=""
+                [class.ng-invalid]="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
+                formControlName="username">
+            <input class="input-nice" type="text" name="" id=""
+                [class.ng-invalid]="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
+                formControlName="email">
+            <input class="input-nice" type="text" name="" id=""
+                [class.ng-invalid]="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
+                formControlName="password">
 
-                 />
-
-            <button [disabled]="form.invalid" class="btn-primary" type="submit">Submit</button>
+            <button class="btn-primary" type="submit">Submit</button>
         </form>
         <hr>
+
+        <p>Username Value: {{ registerForm.get('username')?.value }}</p>
+        <p>Email Value: {{ registerForm.get('email')?.value }}</p>
+        <p>Password Value: {{ registerForm.get('password')?.value }}</p>
 
     </div>
 
