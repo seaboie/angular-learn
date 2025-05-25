@@ -27,6 +27,12 @@
 
             <input class="input-nice" type="text" name="" id="" placeholder="Email address"
                 [class.ng-invalid]="checkInvalidClass('email')" formControlName="email">
+
+            <select formControlName="roleId" class="input-nice">
+              <option *ngFor="let role of roles" [ngValue]="role.id">{{role.title}}</option>
+            </select>
+
+            
             <input class="input-nice" type="text" name="" id="" placeholder="Your password" maxlength="8"
                 [class.ng-invalid]="checkInvalidClass('password')" formControlName="password">
 

@@ -1,15 +1,15 @@
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
 import {} from './shared/types/form-error-type';
+import { title } from 'node:process';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,16 @@ import {} from './shared/types/form-error-type';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    this.registerForm.get('roleId')?.valueChanges.subscribe((roleId) => {
+      console.log('Dropdown menu ID is: ', roleId);
+      
+    });
+    this.registerForm.get('username')?.valueChanges.subscribe((username) => {
+      console.log("Username change is ", username);
+    })
+  }
 
   private fb = inject(FormBuilder);
 
@@ -33,7 +42,14 @@ export class AppComponent {
       Validators.minLength(6),
       Validators.maxLength(6),
     ]),
+    roleId: this.fb.control(1, [Validators.required]),
   });
+
+  roles = [
+    {id: 1, title: 'developer'},
+    {id: 2, title: 'programmer'},
+    {id: 3, title: 'student'}
+  ];
 
   onSubmit(): void {
     console.log('Submit Form : ', this.registerForm.value);
