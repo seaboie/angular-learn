@@ -1,0 +1,9 @@
+<div>
+    <div class="my-12 text-2xl text-red-400">Log In ( for see more... )</div>
+    <div> {{ error }} </div>
+    <form (ngSubmit)="onSubmit()" >
+        <input type="text" placeholder="Username" name="username" class="input-nice" [(ngModel)]="username">
+        <input type="text" placeholder="Password" name="password" class="input-nice" [(ngModel)]="password">
+        <button class="btn-primary" >Submit</button>
+    </form>
+</div>

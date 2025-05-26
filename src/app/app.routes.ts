@@ -5,6 +5,8 @@ import { PagesComponent } from './components/pages/pages.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SettingsProfileComponent } from './components/settings-profile/settings-profile.component';
 import { SettingsProductComponent } from './components/settings-product/settings-product.component';
+import { authGuard } from './auth/auth/auth.guard';
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
     {
@@ -18,7 +20,8 @@ export const routes: Routes = [
     },
     {
         path: 'products',
-        loadComponent: () => import('./components/products/products.component').then((c) => c.ProductsComponent)
+        loadComponent: () => import('./components/products/products.component').then((c) => c.ProductsComponent),
+        canActivate: [authGuard]
     },
     {
         path: 'settings',
@@ -42,6 +45,11 @@ export const routes: Routes = [
     {
         path: 'pages/:pageId',
         component: PagesComponent
+    },
+    // Log in
+    {
+        path: 'login',
+        component: LoginComponent
     },
     // Redirect Function
     {
