@@ -1,0 +1,10 @@
+<p class="text-3xl text-center my-3">settings works!</p>
+
+<div class="flex justify-around my-10 text-blue-600">
+    <a routerLink="profile" routerLinkActive="active font-semibold text-red-800 border-b-2" [routerLinkActiveOptions]="{exact: true}">Settings Profile</a>
+    <a routerLink="products" routerLinkActive="active font-semibold text-red-800 border-b-2" [routerLinkActiveOptions]="{exact: true}">Settings Products</a>
+</div>
+
+<div>
+    <router-outlet />
+</div>

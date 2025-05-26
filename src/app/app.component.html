@@ -1,5 +1,23 @@
-<main>
-  <section>
-    <app-user />
+<main class="w-full min-h-screen bg-gray-100 p-10 flex flex-col ">
+  <section class="w-2xl bg-white mx-auto p-6 ">
+    <h1 class="text-2xl text-green-600 font-semibold text-center">Layout</h1>
+    <div class="flex justify-around mt-8 cursor-pointer text-blue-600">
+      <a routerLink="/dashboard" routerLinkActive="active font-semibold text-red-800 border-b-2">Dashboard</a>
+      <a routerLink="/products" routerLinkActive="active font-semibold text-red-800 border-b-2">Products</a>
+      <a routerLink="/settings" routerLinkActive="active font-semibold text-red-800 border-b-2"
+        [routerLinkActiveOptions]="{exact: true}">Settings</a>
+      <a routerLink="settings/profile" routerLinkActive="active font-semibold text-red-800 border-b-2"> Settings Profile</a>
+      <a routerLink="settings/products" routerLinkActive="active font-semibold text-red-800 border-b-2"> Settings Products</a>
+    </div>
+    <div class="py-2 mt-6">
+      <hr class="border-t-1 border-gray-200">
+    </div>
+
+
+
+    <router-outlet />
   </section>
+
+
+
 </main>
