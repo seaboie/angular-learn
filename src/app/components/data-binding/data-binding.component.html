@@ -1,0 +1,33 @@
+<div class="w-full h-full grid place-items-center">
+    <h1 class="my-4 text-2xl font-semibold" >One Way Data Binding</h1>
+    <div class="grid place-items-center">
+        <p class="text-xl">1. Interpolation</p>
+        <p><b>{{ topic }}</b> from {{ name }} </p>
+    </div>
+    <div class="grid place-items-center">
+        <p class="text-xl">2. Property Binding</p>
+        <input class="input-nice" type="text" [placeholder]="topic">
+        <div>
+            <img [src]="image" alt="" width="80" height="80" [alt]="name">
+        </div>
+    </div>
+    <div class="grid place-items-center">
+        <p class="text-xl">2. Event Binding</p>
+        <button class="btn-primary" (click)="onSave()">Save</button>
+
+        <select class="input-nice" (change)="onChangeDropdown()">
+            <option value="">Select country</option>
+            <option value="India">India</option>
+            <option value="Germany">Germany</option>
+            <option value="Franch">Franch</option>
+            <option value="Spain">Spain</option>
+        </select>
+        
+    </div>
+    <div class="grid place-items-center">
+        <p class="text-xl">2. Two Way Data Binding</p>
+        <input class="input-nice" type="text" [placeholder]="topic" [(ngModel)]="random">
+        <p> {{ random }} </p>
+        
+    </div>
+</div>
